@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statify</title>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+</head>
+
+
+<body>
+
+    {% from "spotifyIcons.html" import spotifyIcons with context %}
+
+    <script>
+        var activeReceipt;
+
+        function switchTime(id) {
+            
+        }
+
+        function showContent(id) {
+            // set all of the other ones to invisible
+            for (let i = 0; i < document.querySelectorAll(".spotifyIcons").length; i++) {
+                document.querySelectorAll(".spotifyIcons")[i].style.display = "none"
+            }
+            document.getElementById(id).style.display = 'inline-block'
+            document.getElementById('downloadPicButton').style.display = 'inline-block'
+            activeReceipt = id
+        }
+
+        function hiddenClone(element) {
+            // Create clone of element
+            var clone = element.cloneNode(true);
+
+            // Position element relatively within the
+            // body but still out of the viewport
+            var style = clone.style;
+            style.position = "relative";
+            style.top = window.innerHeight + "px";
+            style.left = 0;
+            // Append clone to body and return the clone
+            document.body.appendChild(clone);
+            return clone;
+        }
+
+        $(document).ready(function () {
+
+            // Global variable
+            var element = $(".spotifyIconsWrapper");
+
+            // Global variable
+            var getCanvas;
+
+            $("#downloadPicButton").on('click', function () {
+                var offScreen = document.querySelector(".spotifyIconsWrapper");
+                window.scrollTo(0, 0);
+                var clone = hiddenClone(offScreen);
+                // Use clone with htm2canvas and delete clone
+                html2canvas(clone, { scrollY: -window.scrollY }).then((canvas) => {
+                    var dataURL = canvas.toDataURL("image/png", 1.0);
+                    document.body.removeChild(clone);
+                    var link = document.createElement("a");
+                    link.href = dataURL;
+                    link.download = `${activeReceipt}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+            });
+
+        });
+        
+    </script>
+
+    <script src="https://kit.fontawesome.com/1eeb84a983.js" crossorigin="anonymous"></script>
+    <div class="sidebar">
+        <div class="logo">
+            <a href="#">
+                <img src="{{ url_for('static', filename='img/logoWriting.png') }}" alt="logo" />
+            </a>
+        </div>
+
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="fa fa-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="fa-solid fa-user"></span>
+                        <span>Top Artists</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="fa-solid fa-music"></span>
+                        <span>Top Tracks</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="policies">
+            <ul>
+                <li>
+                    <a href="#">
+                        Cookies
+                    </a>
+                </li>
+    
+                <li>
+                    <a href="#">
+                        Privacy
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+    </div>
+    <div class="main-container">
+        <div class="topbar">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <button onclick="showContent('short_term_receipt')" class="generatePicButton">4 WEEKS</button>
+                    </li>
+                </ul>
+    
+                <ul>
+                    <li>
+                        <button onclick="showContent('medium_term_receipt')" class="generatePicButton">6 MONTHS</button>
+                    </li>
+                </ul>
+    
+                <ul>
+                    <li>
+                        <button onclick="showContent('long_term_receipt')" class="generatePicButton">ALL-TIME</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="spotifyIconsWrapper">
+            {{ spotifyIcons(short_term['items'], 'short_term_receipt', 'LAST MONTH') }}
+            {{ spotifyIcons(medium_term['items'], 'medium_term_receipt', 'LAST 6 MONTHS') }}
+            {{ spotifyIcons(long_term['items'], 'long_term_receipt', 'ALL TIME') }}
+        </div>
+
+    </div>
+</body>
+</html>
