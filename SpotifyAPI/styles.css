@@ -1,0 +1,317 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #060606 0%, #3A3A3A 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 12rem; /* Use rem units for consistent sizing */
+    min-width: 10rem; /* Set a minimum width */
+    max-width: 14rem; /* Set a minimum width */
+    background-color: #111111;
+    padding: 24px;
+}
+
+.sidebar .logo img{
+    width: 150px;
+    max-width: 150px;
+    min-width: 150px;
+}
+
+
+/* UNORDERED LIST */
+.sidebar .navigation ul {
+    list-style: none;
+    padding: 75px 0px;     
+}
+
+ /* LIST ITEM */
+.sidebar .navigation ul li {
+    padding: 15px 0px;
+}
+
+/* ANCHOR */
+.sidebar .navigation ul li a{
+    color: #bfbfbf;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* ICONS - Used to space the icons and the text*/
+.sidebar .navigation ul li .fa {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.sidebar .navigation ul li .fa-solid {
+    font-size: 20px;
+    margin-right: 14px;
+}
+
+/* HOVERING OVER SIDEBAR BUTTONS */
+.sidebar .navigation ul li a:hover, 
+.sidebar .navigation ul li a:active,
+.sidebar .navigation ul li a:focus {
+    color: #f1f1f1
+}
+
+
+/* POLICIES - COOKIES, PRIVACY*/
+.sidebar .policies {
+    position: absolute;
+    bottom: 20px;
+}
+
+.sidebar .policies ul {
+    list-style: none;
+}
+
+.sidebar .policies ul li {
+    padding-bottom: 5px;
+}
+
+.sidebar .policies ul li a{
+    color: #b3b3b3;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sidebar .policies ul li a:hover,
+.sidebar .policies ul li a:active,
+.sidebar .policies ul li a:focus {
+    text-decoration: underline;
+    color: #f1f1f1;
+}
+
+/* MAIN CONTAINER */
+.main-container {
+    object-fit: cover;
+    margin-bottom: 100px;
+    justify-content: center; /* Center horizontally */
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.containerContents {
+    flex-wrap: wrap;
+    margin-left: 12rem;
+}
+
+/* TOP BAR */
+.topbar {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 30px;
+    width: 100%;
+    height: 15%;
+    min-height: 15%;
+    max-height: 15%;
+}
+
+.topbar .navbar {
+    display: flex;
+    justify-content: center;
+    word-break: break-all;
+    width: 100%;
+    margin-left: 11.5rem;
+}
+
+.topbar .navbar ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    justify-content: center;
+}
+
+.topbar .navbar ul li {
+    display: inline-block;
+    margin: 10px 40px;
+    width: 120px;
+}
+
+.topbar .navbar ul li .highlight-btn.active {
+    box-shadow: 0 3px #ffffff;
+    font-weight: bolder;
+    transform: translateY(8px);
+    color: #ffffff;
+    /* background-color: #1f1f1f; */
+  }
+
+.topbar .navbar ul li .highlight-btn{
+    background-color: transparent;
+    color: #888888;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0px;
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* HOVERING OVER TOPBAR BUTTONS - 4 WEEKS, 6 MONTHS, ALL-TIME */
+.topbar .navbar ul li .highlight-btn.active:hover, 
+.topbar .navbar ul li .highlight-btn.active:active, 
+.topbar .navbar ul li .highlight-btn.active:focus {
+    color: #f1f1f1;
+}
+
+.trackIcons {
+    padding-bottom: 20px;
+    height: auto;
+    max-height: 40%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Icons */
+.trackIcons .spotify-icons {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+.trackIcons .spotify-icons h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.trackIcons .spotify-icons .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100%;
+    gap: 20px;
+    max-width: 100%;
+}
+
+.trackIcons .spotify-icons .list .item {
+    flex: 1 1 calc(12.5% - 20px); /* Adjust percentage to fit items per row */
+    max-width: calc(15% - 20px); /* Limit maximum width */
+    padding: 0.5rem;  /* Padding based on viewport width */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+
+.trackIcons .spotify-icons .list .item:hover{
+    background-color: #252525;
+}
+
+.trackIcons .spotify-icons .list .item img{
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.trackIcons .spotify-icons .list .item h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    overflow-wrap: break-word;
+
+}
+
+.trackIcons .spotify-icons .list .item p {
+    color: #989898;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+}
+
+/* Track Table */
+.trackTable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.trackTable .tracks {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 97.5%;
+    color: #ffffff;
+    border-collapse: collapse;
+    align-content: space-between;
+}
+.trackTable thead {
+    border-bottom: 1px solid white;
+}
+
+.trackTable .trackRows {
+    height: 50px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.trackTable .tableItems {
+	color: #ffffff;
+	font-size: 18px;
+    height: 40px;
+    min-height: 5%;
+    width: 100%;
+    transition: 0.2s all;
+}
+
+.trackTable tr.tableItems:nth-child(odd) {
+	background-color: #222222;
+}
+
+.trackTable tr.tableItems:nth-child(odd):hover {
+	background-color: #323232;
+    transition: 0.2s all;
+}
+
+.trackTable tr.tableItems:nth-child(even):hover {
+	background-color: #2c2c2c;
+}
+
+.trackTable .rank {
+    padding-left: 4px;
+    font-weight: bold;
+}
+
+.trackTable .track {
+    padding-left: 4px;
+}
+
+
+
+.display {
+    display: inline;
+}
+
+
+
+
+.topbar button {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-right: 20px;
+  }
