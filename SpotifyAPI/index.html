@@ -20,15 +20,15 @@
         let activeButton = { navbar: null, sidebar: null };
 
 function hideAll() {
-    ['shortTermIcons', 'mediumTermIcons', 'longTermIcons', 'shortTermTable', 'mediumTermTable', 'longTermTable']
+    ['shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable']
         .forEach(id => document.getElementById(id).style.display = 'none');
 }
 
 function showContent(id) {
     const contentIds = {
-        'shortTerm': ['shortTermIcons', 'shortTermTable'],
-        'mediumTerm': ['mediumTermIcons', 'mediumTermTable'],
-        'longTerm': ['longTermIcons', 'longTermTable']
+        'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
+        'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
+        'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable']
     };
 
     hideAll();
@@ -61,7 +61,7 @@ function initializePage() {
     defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
 
     const default4Weeks = document.getElementById('default4Weeks');
-    default4Weeks && (showContent('shortTerm'), handleButtonClick({ target: default4Weeks }, 'navbar'));
+    default4Weeks && (showContent('shortTermTracks'), handleButtonClick({ target: default4Weeks }, 'navbar'));
 }
     </script>
 
@@ -105,30 +105,30 @@ function initializePage() {
         <div class="topbar">
             <div class="navbar">
                 <ul>
-                    <li><button id="default4Weeks" class="navbarButton" onclick="showContent('shortTerm')">4 WEEKS</button></li>
-                    <li><button class="navbarButton" onclick="showContent('mediumTerm')">6 MONTHS</button></li>
-                    <li><button class="navbarButton" onclick="showContent('longTerm')">ALL-TIME</button></li>
+                    <li><button id="default4Weeks" class="navbarButton" onclick="showContent('shortTermTracks')">4 WEEKS</button></li>
+                    <li><button class="navbarButton" onclick="showContent('mediumTermTracks')">6 MONTHS</button></li>
+                    <li><button class="navbarButton" onclick="showContent('longTermTracks')">ALL-TIME</button></li>
                 </ul>
             </div>
         </div>
         <div class="containerContents">
-            <div id="shortTermIcons" class="trackIcons">
-                {{ trackIcons(short_term['items'], 'shortTermIcons', 'LAST MONTH') }}
+            <div id="shortTermTrackIcons" class="trackIcons">
+                {{ trackIcons(short_term['items'], 'shortTermTrackIcons', 'LAST MONTH') }}
             </div>
-            <div id="mediumTermIcons" class="trackIcons">
-                {{ trackIcons(medium_term['items'], 'mediumTermIcons', 'LAST 6 MONTHS') }}
+            <div id="mediumTermTrackIcons" class="trackIcons">
+                {{ trackIcons(medium_term['items'], 'mediumTermTrackIcons', 'LAST 6 MONTHS') }}
             </div>
-            <div id="longTermIcons" class="trackIcons">
-                {{ trackIcons(long_term['items'], 'longTermIcons', 'ALL TIME') }}
+            <div id="longTermTrackIcons" class="trackIcons">
+                {{ trackIcons(long_term['items'], 'longTermTrackIcons', 'ALL TIME') }}
             </div>
-            <div id="shortTermTable" class="trackTable">
-                {{ trackTable(short_term['items'], 'shortTermTable', 'LAST MONTH') }}
+            <div id="shortTermTrackTable" class="trackTable">
+                {{ trackTable(short_term['items'], 'shortTermTrackTable', 'LAST MONTH') }}
             </div>
-            <div id="mediumTermTable" class="trackTable">
-                {{ trackTable(medium_term['items'], 'mediumTermTable', 'LAST 6 MONTHS') }}
+            <div id="mediumTermTrackTable" class="trackTable">
+                {{ trackTable(medium_term['items'], 'mediumTermTrackTable', 'LAST 6 MONTHS') }}
             </div>
-            <div id="longTermTable" class="trackTable">
-                {{ trackTable(long_term['items'], 'longTermTable', 'ALL TIME') }}
+            <div id="longTermTrackTable" class="trackTable">
+                {{ trackTable(long_term['items'], 'longTermTrackTable', 'ALL TIME') }}
             </div>
         </div>
     </div>
