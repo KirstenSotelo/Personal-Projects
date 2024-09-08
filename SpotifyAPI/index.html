@@ -17,52 +17,78 @@
     {% from "trackTable.html" import trackTable with context %}
 
     <script>
-        let activeButton = { navbar: null, sidebar: null };
+    let activeButton = { navbar: null, sidebar: null };
 
-function hideAll() {
-    ['shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable']
-        .forEach(id => document.getElementById(id).style.display = 'none');
-}
-
-function showContent(id) {
-    const contentIds = {
-        'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
-        'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
-        'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable']
-    };
-
-    hideAll();
-    contentIds[id]?.forEach(contentId => {
-        document.getElementById(contentId).style.display = 'inline-block';
-    });
-}
-
-function handleButtonClick(event, type) {
-    if (activeButton[type] && activeButton[type] !== event.target) {
-        activeButton[type].classList.remove('active');
+    function hideAll() {
+        ['shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable']
+            .forEach(id => document.getElementById(id).style.display = 'none');
     }
 
-    event.target.classList.add('active');
-    activeButton[type] = event.target;
-}
+    function showTrackContent(id) {
+        const contentIds = {
+            'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
+            'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
+            'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable']
+        };
 
-function initializePage() {
-    hideAll();
+        hideAll();
+        contentIds[id]?.forEach(contentId => {
+            document.getElementById(contentId).style.display = 'inline-block';
+        });
+    }
 
-    document.querySelectorAll('.navbarButton').forEach(button => {
-        button.addEventListener('click', (e) => handleButtonClick(e, 'navbar'));
-    });
+    function handleButtonClick(event, type) {
+        if (activeButton[type] && activeButton[type] !== event.target) {
+            activeButton[type].classList.remove('active');
+        }
 
-    document.querySelectorAll('.sidebarButton').forEach(button => {
-        button.addEventListener('click', (e) => handleButtonClick(e, 'sidebar'));
-    });
+        event.target.classList.add('active');
+        activeButton[type] = event.target;
+    }
 
-    const defaultHome = document.getElementById('defaultHome');
-    defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
+    function initializePage() {
+        hideAll();
 
-    const default4Weeks = document.getElementById('default4Weeks');
-    default4Weeks && (showContent('shortTermTracks'), handleButtonClick({ target: default4Weeks }, 'navbar'));
-}
+        document.querySelectorAll('.navbarButton').forEach(button => {
+            button.addEventListener('click', (e) => handleNavbarClick(e));
+        });
+
+        document.querySelectorAll('.sidebarButton').forEach(button => {
+            button.addEventListener('click', (e) => handleTrackButton(e));
+        });
+
+        const defaultHome = document.getElementById('defaultHome');
+        defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
+
+        const default4Weeks = document.getElementById('default4Weeks');
+        default4Weeks && handleButtonClick({ target: default4Weeks }, 'navbar');
+    }
+
+    function handleTrackButton(event) {
+        handleButtonClick(event, 'sidebar');
+        if (event.target.classList.contains('fa-music')) {
+            // Show default short-term tracks if the "Tracks" button is clicked
+            showTrackContent('shortTermTracks');
+        } else {
+            // Hide all tracks when any other sidebar button is clicked
+            hideAll();
+        }
+    }
+
+    function handleNavbarClick(event) {
+        handleButtonClick(event, 'navbar');
+
+        // Ensure "Top Tracks" is active before changing content
+        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-music')) {
+            if (event.target.id === 'default4Weeks') {
+                showTrackContent('shortTermTracks');
+            } else if (event.target.textContent.includes('6 MONTHS')) {
+                showTrackContent('mediumTermTracks');
+            } else if (event.target.textContent.includes('ALL-TIME')) {
+                showTrackContent('longTermTracks');
+            }
+        }
+    }
     </script>
 
     <div class="sidebar">
@@ -75,15 +101,15 @@ function initializePage() {
         <div class="navigation">
             <ul>
                 <li>
-                    <button id="defaultHome" class="sidebarButton fa fa-home">   Home
+                    <button id="defaultHome" class="sidebarButton fa fa-home" onclick="handleTrackButton(event)">   Home
                     </button>
                 </li>
                 <li>
-                    <button class="sidebarButton fa-solid fa-user">  Top Artists
+                    <button class="sidebarButton fa-solid fa-user" onclick="handleTrackButton(event)">  Top Artists
                     </button>
                 </li>
                 <li>
-                    <button class="sidebarButton fa-solid fa-music">  Top Tracks
+                    <button class="sidebarButton fa-solid fa-music" onclick="handleTrackButton(event)">  Top Tracks
                     </button>
                 </li>
             </ul>
