@@ -4,47 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Statify</title>
     <link 
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
         rel="stylesheet"
     />
-    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://kit.fontawesome.com/1eeb84a983.js" crossorigin="anonymous"></script>
 </head>
-
-
-<body onLoad="hideAll();">
-
+<body onload="initializePage();">
     {% from "trackIcons.html" import trackIcons with context %}
     {% from "trackTable.html" import trackTable with context %}
 
     <script>
+        let activeButton = { navbar: null, sidebar: null };
 
-    function hideAll() {
-        ['shortTermIcons', 'mediumTermIcons', 'longTermIcons', 'shortTermTable', 'mediumTermTable', 'longTermTable']
-            .forEach(id => document.getElementById(id).style.display = 'none');
+function hideAll() {
+    ['shortTermIcons', 'mediumTermIcons', 'longTermIcons', 'shortTermTable', 'mediumTermTable', 'longTermTable']
+        .forEach(id => document.getElementById(id).style.display = 'none');
+}
+
+function showContent(id) {
+    const contentIds = {
+        'shortTerm': ['shortTermIcons', 'shortTermTable'],
+        'mediumTerm': ['mediumTermIcons', 'mediumTermTable'],
+        'longTerm': ['longTermIcons', 'longTermTable']
+    };
+
+    hideAll();
+    contentIds[id]?.forEach(contentId => {
+        document.getElementById(contentId).style.display = 'inline-block';
+    });
+}
+
+function handleButtonClick(event, type) {
+    if (activeButton[type] && activeButton[type] !== event.target) {
+        activeButton[type].classList.remove('active');
     }
 
-    function showContent(id) {
-        const contentIds = {
-            'shortTerm': ['shortTermIcons', 'shortTermTable'],
-            'mediumTerm': ['mediumTermIcons', 'mediumTermTable'],
-            'longTerm': ['longTermIcons', 'longTermTable']
-        };
+    event.target.classList.add('active');
+    activeButton[type] = event.target;
+}
 
-        hideAll(); // Hide everything first
+function initializePage() {
+    hideAll();
 
-        if (contentIds[id]) {
-            contentIds[id].forEach(contentId => {
-                document.getElementById(contentId).style.display = 'inline-block';
-            });
-        }
-    }
-        
+    document.querySelectorAll('.navbarButton').forEach(button => {
+        button.addEventListener('click', (e) => handleButtonClick(e, 'navbar'));
+    });
+
+    document.querySelectorAll('.sidebarButton').forEach(button => {
+        button.addEventListener('click', (e) => handleButtonClick(e, 'sidebar'));
+    });
+
+    const defaultHome = document.getElementById('defaultHome');
+    defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
+
+    const default4Weeks = document.getElementById('default4Weeks');
+    default4Weeks && (showContent('shortTerm'), handleButtonClick({ target: default4Weeks }, 'navbar'));
+}
     </script>
 
-    <script src="https://kit.fontawesome.com/1eeb84a983.js" crossorigin="anonymous"></script>
     <div class="sidebar">
         <div class="logo">
             <a href="#">
@@ -55,24 +75,16 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="#">
-                        <span class="fa fa-home"></span>
-                        <span>Home</span>
-                    </a>
+                    <button id="defaultHome" class="sidebarButton fa fa-home">   Home
+                    </button>
                 </li>
-
                 <li>
-                    <a href="#">
-                        <span class="fa-solid fa-user"></span>
-                        <span>Top Artists</span>
-                    </a>
+                    <button class="sidebarButton fa-solid fa-user">  Top Artists
+                    </button>
                 </li>
-
                 <li>
-                    <a href="#">
-                        <span class="fa-solid fa-music"></span>
-                        <span>Top Tracks</span>
-                    </a>
+                    <button class="sidebarButton fa-solid fa-music">  Top Tracks
+                    </button>
                 </li>
             </ul>
         </div>
@@ -80,33 +92,22 @@
         <div class="policies">
             <ul>
                 <li>
-                    <a href="#">
-                        Cookies
-                    </a>
+                    <a href="#">Cookies</a>
                 </li>
-    
                 <li>
-                    <a href="#">
-                        Privacy
-                    </a>
+                    <a href="#">Privacy</a>
                 </li>
             </ul>
         </div>
-    
     </div>
+
     <div class="main-container">
         <div class="topbar">
             <div class="navbar">
                 <ul>
-                    <li>
-                        <button class="highlight-btn" onclick="showContent('shortTerm')">4 WEEKS</button>
-                    </li>
-                    <li>
-                        <button class="highlight-btn" onclick="showContent('mediumTerm')">6 MONTHS</button>
-                    </li>
-                    <li>
-                        <button class="highlight-btn" onclick="showContent('longTerm')">ALL-TIME</button>
-                    </li>
+                    <li><button id="default4Weeks" class="navbarButton" onclick="showContent('shortTerm')">4 WEEKS</button></li>
+                    <li><button class="navbarButton" onclick="showContent('mediumTerm')">6 MONTHS</button></li>
+                    <li><button class="navbarButton" onclick="showContent('longTerm')">ALL-TIME</button></li>
                 </ul>
             </div>
         </div>
@@ -120,7 +121,6 @@
             <div id="longTermIcons" class="trackIcons">
                 {{ trackIcons(long_term['items'], 'longTermIcons', 'ALL TIME') }}
             </div>
-            
             <div id="shortTermTable" class="trackTable">
                 {{ trackTable(short_term['items'], 'shortTermTable', 'LAST MONTH') }}
             </div>
@@ -131,28 +131,6 @@
                 {{ trackTable(long_term['items'], 'longTermTable', 'ALL TIME') }}
             </div>
         </div>
-        
-
     </div>
-
-    <script>
-
-        // Get all buttons with the class 'highlight-btn'
-        const buttons = document.querySelectorAll('.highlight-btn');
-
-        // Function to handle button click
-        function handleButtonClick(event) {
-        // Remove the 'active' class from all buttons
-        buttons.forEach(btn => btn.classList.remove('active'));
-
-        // Add the 'active' class to the clicked button
-        event.target.classList.add('active');
-        }
-
-        // Add click event listeners to all buttons
-        buttons.forEach(button => {
-        button.addEventListener('click', handleButtonClick);
-        });
-    </script>
 </body>
 </html>

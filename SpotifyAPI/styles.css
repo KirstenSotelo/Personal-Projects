@@ -18,55 +18,72 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
+    height: 100%;
     width: 12rem; /* Use rem units for consistent sizing */
     min-width: 10rem; /* Set a minimum width */
     max-width: 14rem; /* Set a minimum width */
     background-color: #111111;
-    padding: 24px;
 }
 
 .sidebar .logo img{
-    width: 150px;
-    max-width: 150px;
-    min-width: 150px;
+    width: 12rem;
+    max-width: 14rem;
+    min-width: 10rem;
+    padding: 24px;
 }
 
 
 /* UNORDERED LIST */
 .sidebar .navigation ul {
     list-style: none;
-    padding: 75px 0px;     
+    padding-top: 2rem;
+    margin: 0;
+    width: 100%;
 }
 
  /* LIST ITEM */
 .sidebar .navigation ul li {
-    padding: 15px 0px;
-}
-
-/* ANCHOR */
-.sidebar .navigation ul li a{
-    color: #bfbfbf;
-    text-decoration: none;
+    padding-top: 15px;
+    margin-left: 3%;
+    text-transform: none;
     font-weight: bold;
-    font-size: 16px;
+    width: 100%;
 }
 
 /* ICONS - Used to space the icons and the text*/
-.sidebar .navigation ul li .fa {
-    font-size: 20px;
-    margin-right: 10px;
-}
-
-.sidebar .navigation ul li .fa-solid {
-    font-size: 20px;
-    margin-right: 14px;
+.sidebar .navigation .sidebarButton {
+    min-width: 110%;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 16px;
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: start;
+    transform: translateX(-30px);
+    color: #888888;
+    transition: all 0.5s ease;
 }
 
 /* HOVERING OVER SIDEBAR BUTTONS */
-.sidebar .navigation ul li a:hover, 
-.sidebar .navigation ul li a:active,
-.sidebar .navigation ul li a:focus {
-    color: #f1f1f1
+.sidebar .navigation .sidebarButton:focus {
+    outline: none; /* Remove default outline */
+    background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+    color: #ffffff;
+}
+
+/* Active State */
+.sidebar .navigation .sidebarButton.active {
+    background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+    color: #ffffff;
+    transform: translateX(-8px);
+}
+
+/* Hover State */
+.sidebar .navigation .sidebarButton:hover {
+    color: #ffffff;
+    background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
 }
 
 
@@ -117,60 +134,70 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
-    padding: 30px 30px;
     width: 100%;
-    height: 15%;
-    min-height: 15%;
-    max-height: 15%;
+    height: 120px;
+    min-height: 25%;
+    max-height: 40%;
 }
 
 .topbar .navbar {
     display: flex;
     justify-content: center;
-    word-break: break-all;
+    align-items: center;
     width: 100%;
+    height: 100%;
     margin-left: 11.5rem;
 }
 
 .topbar .navbar ul {
     list-style: none;
+    justify-content: center;
+    align-items: center;
     padding: 0px;
     margin: 0px;
+    height: 100%;
     justify-content: center;
 }
 
 .topbar .navbar ul li {
     display: inline-block;
-    margin: 10px 40px;
-    width: 120px;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 100%;
 }
 
-.topbar .navbar ul li .highlight-btn.active {
-    box-shadow: 0 3px #ffffff;
-    font-weight: bolder;
-    transform: translateY(8px);
-    color: #ffffff;
-    /* background-color: #1f1f1f; */
-  }
-
-.topbar .navbar ul li .highlight-btn{
-    background-color: transparent;
-    color: #888888;
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 0px;
-    width: 140px;
+.topbar .navbar ul li .navbarButton{
     display: flex;
     justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    align-items: center;
+    height: 100%; /* Make the button fill the li height */
+    width: 100%;
+    line-height: 1.2; /* Adjust for vertical centering */
+    border-radius: 0;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 14px;
+    color: #888888;
+    transform: translateY(-8px);
+    transition: all 0.4s;
 }
 
 /* HOVERING OVER TOPBAR BUTTONS - 4 WEEKS, 6 MONTHS, ALL-TIME */
-.topbar .navbar ul li .highlight-btn.active:hover, 
-.topbar .navbar ul li .highlight-btn.active:active, 
-.topbar .navbar ul li .highlight-btn.active:focus {
+.topbar .navbar ul li .navbarButton:hover, 
+.topbar .navbar ul li .navbarButton:focus {
     color: #f1f1f1;
 }
+
+.topbar .navbar ul li .navbarButton.active {
+    height: 100%; /* Keep the height consistent when active */
+    background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(6,6,6,0) 100%);
+    font-weight: bolder;
+    width: 100%;
+    color: #ffffff;
+    /* background-color: #1f1f1f; */
+    transform: translateY(0px);
+  }
 
 .trackIcons {
     padding-bottom: 20px;
