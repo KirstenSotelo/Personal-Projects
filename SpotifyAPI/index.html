@@ -26,7 +26,8 @@
         'shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 
         'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable',
         'shortTermArtistIcons', 'mediumTermArtistIcons', 'longTermArtistIcons',
-        'shortTermArtistTable', 'mediumTermArtistTable', 'longTermArtistTable'
+        'shortTermArtistTable', 'mediumTermArtistTable', 'longTermArtistTable',
+        "shortTermHomeArtistIcons"
     ].forEach(id => {
         const element = document.getElementById(id);
         if (element) {
@@ -39,7 +40,7 @@
         const contentIds = {
             'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
             'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
-            'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable']
+            'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable'],
         };
 
         hideAll();
@@ -52,7 +53,20 @@
         const contentIds = {
             'shortTermArtists': ['shortTermArtistIcons', 'shortTermArtistTable'],
             'mediumTermArtists': ['mediumTermArtistIcons', 'mediumTermArtistTable'],
-            'longTermArtists': ['longTermArtistIcons', 'longTermArtistTable']
+            'longTermArtists': ['longTermArtistIcons', 'longTermArtistTable'],
+        };
+
+        hideAll();
+        contentIds[id]?.forEach(contentId => {
+            document.getElementById(contentId).style.display = 'inline-block';
+        });
+    }
+
+    function showHomeContent(id) {
+        const contentIds = {
+            'shortTermHome': ['shortTermArtistIcons', 'shortTermTrackIcons'],
+            'mediumTermHome': ['mediumTermArtistIcons', 'mediumTermTrackIcons'],
+            'longTermHome': ['longTermArtistIcons', 'longTermTrackIcons'],
         };
 
         hideAll();
@@ -86,12 +100,21 @@
 
         const default4Weeks = document.getElementById('default4Weeks');
         default4Weeks && handleButtonClick({ target: default4Weeks }, 'navbar');
+        showHomeContent('shortTermHome');
     }
 
     function handleSidebarButton(event) {
         handleButtonClick(event, 'sidebar');
         if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-home')) {
-            hideAll();
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
+                showHomeContent('shortTermHome');
+            } 
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
+                showHomeContent('mediumTermHome');
+            } 
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
+                showHomeContent('longTermHome');
+            } 
         }
 
         if (event.target.classList.contains('fa-music')) {
@@ -125,7 +148,13 @@
 
         // Ensure "Top Tracks" is active before changing content
         if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-home')) {
-            hideAll();
+            if (event.target.id === 'default4Weeks') {
+                showHomeContent('shortTermHome');
+            } else if (event.target.textContent.includes('6 MONTHS')) {
+                showHomeContent('mediumTermHome');
+            } else if (event.target.textContent.includes('ALL-TIME')) {
+                showHomeContent('longTermHome');
+            }
         }
         if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-user')) {
             if (event.target.id === 'default4Weeks') {
@@ -234,6 +263,10 @@
             </div>
             <div id="longTermArtistTable" class="trackTable">
                 {{ artistTable(longTermArtists['items'], 'longTermArtistTable', 'ALL TIME') }}
+            </div>
+
+            <div id="shortTermHomeArtistIcons" class="artistIcons">
+                {{ artistIcons(shortTermArtists['items'], 'shortTermArtistIcons', 'LAST MONTH') }}
             </div>
         </div>
     </div>
