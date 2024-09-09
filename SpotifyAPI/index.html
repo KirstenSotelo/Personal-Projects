@@ -16,6 +16,7 @@
     {% from "trackIcons.html" import trackIcons with context %}
     {% from "trackTable.html" import trackTable with context %}
     {% from "artistIcons.html" import artistIcons with context %}
+    {% from "artistTable.html" import artistTable with context %}
 
     <script>
     let activeButton = { navbar: null, sidebar: null };
@@ -223,6 +224,16 @@
             </div>
             <div id="longTermArtistIcons" class="artistIcons">
                 {{ artistIcons(longTermArtists['items'], 'longTermArtistIcons', 'ALL TIME') }}
+            </div>
+
+            <div id="shortTermArtistTable" class="trackTable">
+                {{ artistTable(shortTermArtists['items'], 'shortTermArtistTable', 'LAST MONTH') }}
+            </div>
+            <div id="mediumTermArtistTable" class="trackTable">
+                {{ artistTable(mediumTermArtists['items'], 'mediumTermArtistTable', 'LAST 6 MONTHS') }}
+            </div>
+            <div id="longTermArtistTable" class="trackTable">
+                {{ artistTable(longTermArtists['items'], 'longTermArtistTable', 'ALL TIME') }}
             </div>
         </div>
     </div>

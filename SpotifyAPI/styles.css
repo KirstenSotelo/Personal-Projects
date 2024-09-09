@@ -71,19 +71,21 @@ body {
     outline: none; /* Remove default outline */
     background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
     color: #ffffff;
+    transition: all 0.5s ease;
 }
 
 /* Active State */
 .sidebar .navigation .sidebarButton.active {
     background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
     color: #ffffff;
-    transform: translateX(-8px);
+    transform: translateX(-12px);
+    transition: all 0.5s ease;
 }
 
 /* Hover State */
 .sidebar .navigation .sidebarButton:hover {
     color: #ffffff;
-    background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+    transition: all 0.5s ease;
 }
 
 
@@ -192,7 +194,6 @@ body {
 .topbar .navbar ul li .navbarButton.active {
     height: 100%; /* Keep the height consistent when active */
     background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(6,6,6,0) 100%);
-    font-weight: bolder;
     width: 100%;
     color: #ffffff;
     /* background-color: #1f1f1f; */
@@ -208,13 +209,15 @@ body {
 }
 
 /* Icons */
-.trackIcons .spotify-icons {
+.spotify-icons {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
     justify-content: space-between;
     padding: 0px;
 }
+
+/* TRACK ICONS */
 
 .trackIcons .spotify-icons h2 {
     color: #ffffff;
@@ -322,7 +325,59 @@ body {
     padding-left: 4px;
 }
 
+/* ARTIST ICONS */
 
+.artistIcons .spotify-icons h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.artistIcons .spotify-icons .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100%;
+    gap: 20px;
+    max-width: 100%;
+}
+
+.artistIcons .spotify-icons .list .item {
+    flex: 1 1 calc(12.5% - 20px); /* Adjust percentage to fit items per row */
+    max-width: calc(15% - 20px); /* Limit maximum width */
+    padding: 0.5rem;  /* Padding based on viewport width */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+
+.artistIcons .spotify-icons .list .item:hover{
+    background-color: #252525;
+}
+
+.artistIcons .spotify-icons .list .item img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.artistIcons .spotify-icons .list .item h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    overflow-wrap: break-word;
+
+}
+
+.artistIcons .spotify-icons .list .item p {
+    color: #989898;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+}
 
 .display {
     display: inline;

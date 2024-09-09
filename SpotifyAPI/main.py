@@ -34,25 +34,46 @@ def hello_world():
     
 
     current_user_name = sp.current_user()['display_name']
-    short_term = sp.current_user_top_artists(
+
+    # USER TOP TRACKS
+    shortTermTracks = sp.current_user_top_tracks(
         limit=25,
         offset=0,
         time_range="short_term"
     )
 
-    medium_term = sp.current_user_top_artists(
+    mediumTermTracks = sp.current_user_top_tracks(
         limit=25,
         offset=0,
         time_range="medium_term"
     )
 
-    long_term = sp.current_user_top_artists(
+    longTermTracks = sp.current_user_top_tracks(
+        limit=25,
+        offset=0,
+        time_range="long_term"
+    )
+
+    # USER TOP ARTISTS
+    shortTermArtists = sp.current_user_top_artists(
+        limit=25,
+        offset=0,
+        time_range="short_term"
+    )
+
+    mediumTermArtists = sp.current_user_top_artists(
+        limit=25,
+        offset=0,
+        time_range="medium_term"
+    )
+
+    longTermArtists = sp.current_user_top_artists(
         limit=25,
         offset=0,
         time_range="long_term"
     )
     
-    return render_template('index.html', user_display_name=current_user_name, short_term=short_term, medium_term=medium_term, long_term=long_term, currentTime=gmtime())
+    return render_template('index.html', user_display_name=current_user_name, shortTermTracks=shortTermTracks, mediumTermTracks=mediumTermTracks, longTermTracks=longTermTracks, shortTermArtists=shortTermArtists, mediumTermArtists=mediumTermArtists, longTermArtists=longTermArtists, currentTime=gmtime())
 
 # LOGIN PAGE
 @app.route('/login')
@@ -77,25 +98,44 @@ def homepage():
         return redirect(auth_url)
     
     current_user_name = sp.current_user()['display_name']
-    short_term = sp.current_user_top_tracks(
+    shortTermTracks = sp.current_user_top_tracks(
         limit=25,
         offset=0,
         time_range="short_term"
     )
 
-    medium_term = sp.current_user_top_tracks(
+    mediumTermTracks = sp.current_user_top_tracks(
         limit=25,
         offset=0,
         time_range="medium_term"
     )
 
-    long_term = sp.current_user_top_tracks(
+    longTermTracks = sp.current_user_top_tracks(
+        limit=25,
+        offset=0,
+        time_range="long_term"
+    )
+
+    # USER TOP ARTISTS
+    shortTermArtists = sp.current_user_top_artists(
+        limit=25,
+        offset=0,
+        time_range="short_term"
+    )
+
+    mediumTermArtists = sp.current_user_top_artists(
+        limit=25,
+        offset=0,
+        time_range="medium_term"
+    )
+
+    longTermArtists = sp.current_user_top_artists(
         limit=25,
         offset=0,
         time_range="long_term"
     )
     
-    return render_template('index.html', user_display_name=current_user_name, short_term=short_term, medium_term=medium_term, long_term=long_term, currentTime=gmtime())
+    return render_template('index.html', user_display_name=current_user_name, shortTermTracks=shortTermTracks, mediumTermTracks=mediumTermTracks, longTermTracks=longTermTracks, shortTermArtists=shortTermArtists, mediumTermArtists=mediumTermArtists, longTermArtists=longTermArtists, currentTime=gmtime())
 
 # AFTER LOGGING IN
 @app.route('/topTracks')
@@ -167,6 +207,24 @@ def _jinja2_filter_miliseconds(time, fmt=None):
     if seconds < 10: 
         return str(minutes) + ":0" + str(seconds)
     return str(minutes) + ":" + str(seconds ) 
+
+@app.template_filter('format_followers')
+def format_followers(count):
+    if count >= 1_000_000:
+        return f'{count / 1_000_000:.0f}M'
+    elif count >= 1_000:
+        return f'{count / 1_000:.0f}K'
+    return str(count)
+
+@app.template_filter('format_followers_table')
+def format_followers(count):
+    return "{:,}".format(count)
+
+@app.template_filter('format_genres')
+def format_followers(genres):
+    genre_string = ''.join(genres)
+    capitalized_genre = genre_string.title()
+    return capitalized_genre
 
 @app.route('/logout')
 def logout():
