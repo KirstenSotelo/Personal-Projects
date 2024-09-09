@@ -15,20 +15,43 @@
 <body onload="initializePage();">
     {% from "trackIcons.html" import trackIcons with context %}
     {% from "trackTable.html" import trackTable with context %}
+    {% from "artistIcons.html" import artistIcons with context %}
 
     <script>
     let activeButton = { navbar: null, sidebar: null };
 
     function hideAll() {
-        ['shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable']
-            .forEach(id => document.getElementById(id).style.display = 'none');
-    }
+    [
+        'shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 
+        'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable',
+        'shortTermArtistIcons', 'mediumTermArtistIcons', 'longTermArtistIcons',
+        'shortTermArtistTable', 'mediumTermArtistTable', 'longTermArtistTable'
+    ].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = 'none';
+        }
+    });
+}
 
     function showTrackContent(id) {
         const contentIds = {
             'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
             'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
             'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable']
+        };
+
+        hideAll();
+        contentIds[id]?.forEach(contentId => {
+            document.getElementById(contentId).style.display = 'inline-block';
+        });
+    }
+
+    function showArtistContent(id) {
+        const contentIds = {
+            'shortTermArtists': ['shortTermArtistIcons', 'shortTermArtistTable'],
+            'mediumTermArtists': ['mediumTermArtistIcons', 'mediumTermArtistTable'],
+            'longTermArtists': ['longTermArtistIcons', 'longTermArtistTable']
         };
 
         hideAll();
@@ -54,7 +77,7 @@
         });
 
         document.querySelectorAll('.sidebarButton').forEach(button => {
-            button.addEventListener('click', (e) => handleTrackButton(e));
+            button.addEventListener('click', (e) => handleSidebarButton(e));
         });
 
         const defaultHome = document.getElementById('defaultHome');
@@ -64,14 +87,35 @@
         default4Weeks && handleButtonClick({ target: default4Weeks }, 'navbar');
     }
 
-    function handleTrackButton(event) {
+    function handleSidebarButton(event) {
         handleButtonClick(event, 'sidebar');
+        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-home')) {
+            hideAll();
+        }
+
         if (event.target.classList.contains('fa-music')) {
             // Show default short-term tracks if the "Tracks" button is clicked
-            showTrackContent('shortTermTracks');
-        } else {
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
+                showTrackContent('shortTermTracks');
+            } 
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
+                showTrackContent('mediumTermTracks');
+            } 
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
+                showTrackContent('longTermTracks');
+            } 
+        }
+        if (event.target.classList.contains('fa-user')){
             // Hide all tracks when any other sidebar button is clicked
-            hideAll();
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
+                showArtistContent('shortTermArtists');
+            } 
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
+                showArtistContent('mediumTermArtists');
+            } 
+            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
+                showArtistContent('longTermArtists');
+            } 
         }
     }
 
@@ -79,6 +123,18 @@
         handleButtonClick(event, 'navbar');
 
         // Ensure "Top Tracks" is active before changing content
+        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-home')) {
+            hideAll();
+        }
+        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-user')) {
+            if (event.target.id === 'default4Weeks') {
+                showArtistContent('shortTermArtists');
+            } else if (event.target.textContent.includes('6 MONTHS')) {
+                showArtistContent('mediumTermArtists');
+            } else if (event.target.textContent.includes('ALL-TIME')) {
+                showArtistContent('longTermArtists');
+            }
+        }
         if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-music')) {
             if (event.target.id === 'default4Weeks') {
                 showTrackContent('shortTermTracks');
@@ -101,15 +157,15 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <button id="defaultHome" class="sidebarButton fa fa-home" onclick="handleTrackButton(event)">   Home
+                    <button id="defaultHome" class="sidebarButton fa fa-home" onclick="handleSidebarButton(event)">   Home
                     </button>
                 </li>
                 <li>
-                    <button class="sidebarButton fa-solid fa-user" onclick="handleTrackButton(event)">  Top Artists
+                    <button class="sidebarButton fa-solid fa-user" onclick="handleSidebarButton(event)">  Top Artists
                     </button>
                 </li>
                 <li>
-                    <button class="sidebarButton fa-solid fa-music" onclick="handleTrackButton(event)">  Top Tracks
+                    <button class="sidebarButton fa-solid fa-music" onclick="handleSidebarButton(event)">  Top Tracks
                     </button>
                 </li>
             </ul>
@@ -131,30 +187,42 @@
         <div class="topbar">
             <div class="navbar">
                 <ul>
-                    <li><button id="default4Weeks" class="navbarButton" onclick="showContent('shortTermTracks')">4 WEEKS</button></li>
-                    <li><button class="navbarButton" onclick="showContent('mediumTermTracks')">6 MONTHS</button></li>
-                    <li><button class="navbarButton" onclick="showContent('longTermTracks')">ALL-TIME</button></li>
+                    <li><button id="default4Weeks" class="navbarButton 4Weeks" onclick="handleNavbarClick(event)">4 WEEKS</button></li>
+                    <li><button class="navbarButton 6Months" onclick="handleNavbarClick(event)">6 MONTHS</button></li>
+                    <li><button class="navbarButton Alltime" onclick="handleNavbarClick(event)">ALL-TIME</button></li>
                 </ul>
             </div>
         </div>
         <div class="containerContents">
             <div id="shortTermTrackIcons" class="trackIcons">
-                {{ trackIcons(short_term['items'], 'shortTermTrackIcons', 'LAST MONTH') }}
+                {{ trackIcons(shortTermTracks['items'], 'shortTermTrackIcons', 'LAST MONTH') }}
             </div>
             <div id="mediumTermTrackIcons" class="trackIcons">
-                {{ trackIcons(medium_term['items'], 'mediumTermTrackIcons', 'LAST 6 MONTHS') }}
+                {{ trackIcons(mediumTermTracks['items'], 'mediumTermTrackIcons', 'LAST 6 MONTHS') }}
             </div>
             <div id="longTermTrackIcons" class="trackIcons">
-                {{ trackIcons(long_term['items'], 'longTermTrackIcons', 'ALL TIME') }}
+                {{ trackIcons(longTermTracks['items'], 'longTermTrackIcons', 'ALL TIME') }}
             </div>
             <div id="shortTermTrackTable" class="trackTable">
-                {{ trackTable(short_term['items'], 'shortTermTrackTable', 'LAST MONTH') }}
+                {{ trackTable(shortTermTracks['items'], 'shortTermTrackTable', 'LAST MONTH') }}
             </div>
             <div id="mediumTermTrackTable" class="trackTable">
-                {{ trackTable(medium_term['items'], 'mediumTermTrackTable', 'LAST 6 MONTHS') }}
+                {{ trackTable(mediumTermTracks['items'], 'mediumTermTrackTable', 'LAST 6 MONTHS') }}
             </div>
             <div id="longTermTrackTable" class="trackTable">
-                {{ trackTable(long_term['items'], 'longTermTrackTable', 'ALL TIME') }}
+                {{ trackTable(longTermTracks['items'], 'longTermTrackTable', 'ALL TIME') }}
+            </div>
+
+
+
+            <div id="shortTermArtistIcons" class="artistIcons">
+                {{ artistIcons(shortTermArtists['items'], 'shortTermArtistIcons', 'LAST MONTH') }}
+            </div>
+            <div id="mediumTermArtistIcons" class="artistIcons">
+                {{ artistIcons(mediumTermArtists['items'], 'mediumTermArtistIcons', 'LAST 6 MONTHS') }}
+            </div>
+            <div id="longTermArtistIcons" class="artistIcons">
+                {{ artistIcons(longTermArtists['items'], 'longTermArtistIcons', 'ALL TIME') }}
             </div>
         </div>
     </div>
