@@ -11,7 +11,6 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
-
 /* SIDEBAR */
 .sidebar {
     position: fixed;
@@ -19,24 +18,50 @@ body {
     top: 0;
     bottom: 0;
     height: 100%;
-    width: 12rem; /* Use rem units for consistent sizing */
+    width: 13rem; /* Use rem units for consistent sizing */
     min-width: 10rem; /* Set a minimum width */
     max-width: 14rem; /* Set a minimum width */
     background-color: #111111;
 }
 
-.sidebar .logo img{
-    width: 12rem;
-    max-width: 14rem;
-    min-width: 10rem;
-    padding: 24px;
+.sidebar .logo{
+    position: relative;
+    width: 100%;
+    padding: 2px;
+    text-align: center;
+    background-color: #111111;
 }
 
+.sidebar .logo::after {
+    content: "";
+    position: relative;
+    transform: translateY(-20px);
+    text-align: center;
+    display: block;
+    height: 2px;
+    width: 45%;
+    background: #ffffff;
+    margin: 0 auto;
+    border-radius: 50px;
+}
+
+.sidebar .logo button {
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+    margin-top: 5%;
+    width: 100%;
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 3rem;
+    height:5rem;
+    font-weight: bold;
+}
 
 /* UNORDERED LIST */
 .sidebar .navigation ul {
     list-style: none;
-    padding-top: 2rem;
+    padding-top: 1rem;
     margin: 0;
     width: 100%;
 }
@@ -56,7 +81,8 @@ body {
     border: none;
     background-color: transparent;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     padding-left: 40px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -64,6 +90,7 @@ body {
     transform: translateX(-30px);
     color: #888888;
     transition: all 0.5s ease;
+    cursor: pointer;
 }
 
 /* HOVERING OVER SIDEBAR BUTTONS */
@@ -92,6 +119,7 @@ body {
 /* POLICIES - COOKIES, PRIVACY*/
 .sidebar .policies {
     position: absolute;
+    left: 10px;
     bottom: 20px;
 }
 
@@ -128,7 +156,7 @@ body {
 
 .containerContents {
     flex-wrap: wrap;
-    margin-left: 12rem;
+    margin-left: 13rem;
 }
 
 /* TOP BAR */
@@ -230,14 +258,14 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     min-width: 100%;
-    gap: 20px;
+    gap: 2px;
     max-width: 100%;
 }
 
 .trackIcons .spotify-icons .list .item {
     flex: 1 1 calc(12.5% - 20px); /* Adjust percentage to fit items per row */
     max-width: calc(15% - 20px); /* Limit maximum width */
-    padding: 0.5rem;  /* Padding based on viewport width */
+    padding: 0.3rem;  /* Padding based on viewport width */
     border-radius: 6px;
     cursor: pointer;
     transition: all ease 0.4s;
@@ -322,7 +350,15 @@ body {
 }
 
 .trackTable .track {
-    padding-left: 4px;
+    padding-left: 12px;
+}
+
+.trackTable .artist {
+    padding-left: 12px;
+}
+
+.trackTable .followers {
+    padding-right: 25px;
 }
 
 /* ARTIST ICONS */
@@ -338,14 +374,14 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     min-width: 100%;
-    gap: 20px;
+    gap: 2px;
     max-width: 100%;
 }
 
 .artistIcons .spotify-icons .list .item {
     flex: 1 1 calc(12.5% - 20px); /* Adjust percentage to fit items per row */
     max-width: calc(15% - 20px); /* Limit maximum width */
-    padding: 0.5rem;  /* Padding based on viewport width */
+    padding: 0.3rem;  /* Padding based on viewport width */
     border-radius: 6px;
     cursor: pointer;
     transition: all ease 0.4s;
@@ -383,17 +419,79 @@ body {
     display: inline;
 }
 
-
-
-
-.topbar button {
+.topbar .navbar button {
     background-color: #ffffff;
     color: #000000;
-    font-size: 16px;
+    font-size: 8px;
     font-weight: bold;
     padding: 14px 30px;
     border: 0px;
     border-radius: 40px;
     cursor: pointer;
     margin-right: 20px;
-  }
+    background-color: blue;
+}
+
+.dropdown {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: inline-block;
+}
+
+.user {
+    background-color: #333333;
+    color: white;
+    width: auto;
+    height: 3rem;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    transition: all ease 0.3s;
+}
+
+.user:hover {
+    background-color: #333333;
+    transition: all ease 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: transparent;
+    width: 100%;
+    z-index: 1;
+    transition: all ease 0.3s;
+}
+
+.dropdown-content a {
+    position: fixed;
+    text-decoration: none;
+    background-color: #2c2c2c;
+    color: white;
+    width: auto;
+    height: 3rem;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    transition: all ease 0.3s;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    transition: all ease 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #333333;
+    transition: all ease 0.3s;
+}
+
+
+
+/* PRE LOGIN PAGE STUFF */

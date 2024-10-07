@@ -2,273 +2,209 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statify</title>
+    <title>Stats for Spotify</title>
     <link 
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
         rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/indexStyle.css') }}">
     <script src="https://kit.fontawesome.com/1eeb84a983.js" crossorigin="anonymous"></script>
 </head>
-<body onload="initializePage();">
-    {% from "trackIcons.html" import trackIcons with context %}
-    {% from "trackTable.html" import trackTable with context %}
-    {% from "artistIcons.html" import artistIcons with context %}
-    {% from "artistTable.html" import artistTable with context %}
 
-    <script>
-    let activeButton = { navbar: null, sidebar: null };
-
-    function hideAll() {
-    [
-        'shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 
-        'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable',
-        'shortTermArtistIcons', 'mediumTermArtistIcons', 'longTermArtistIcons',
-        'shortTermArtistTable', 'mediumTermArtistTable', 'longTermArtistTable',
-        "shortTermHomeArtistIcons"
-    ].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.style.display = 'none';
-        }
-    });
-}
-
-    function showTrackContent(id) {
-        const contentIds = {
-            'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
-            'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
-            'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable'],
-        };
-
-        hideAll();
-        contentIds[id]?.forEach(contentId => {
-            document.getElementById(contentId).style.display = 'inline-block';
-        });
-    }
-
-    function showArtistContent(id) {
-        const contentIds = {
-            'shortTermArtists': ['shortTermArtistIcons', 'shortTermArtistTable'],
-            'mediumTermArtists': ['mediumTermArtistIcons', 'mediumTermArtistTable'],
-            'longTermArtists': ['longTermArtistIcons', 'longTermArtistTable'],
-        };
-
-        hideAll();
-        contentIds[id]?.forEach(contentId => {
-            document.getElementById(contentId).style.display = 'inline-block';
-        });
-    }
-
-    function showHomeContent(id) {
-        const contentIds = {
-            'shortTermHome': ['shortTermArtistIcons', 'shortTermTrackIcons'],
-            'mediumTermHome': ['mediumTermArtistIcons', 'mediumTermTrackIcons'],
-            'longTermHome': ['longTermArtistIcons', 'longTermTrackIcons'],
-        };
-
-        hideAll();
-        contentIds[id]?.forEach(contentId => {
-            document.getElementById(contentId).style.display = 'inline-block';
-        });
-    }
-
-    function handleButtonClick(event, type) {
-        if (activeButton[type] && activeButton[type] !== event.target) {
-            activeButton[type].classList.remove('active');
-        }
-
-        event.target.classList.add('active');
-        activeButton[type] = event.target;
-    }
-
-    function initializePage() {
-        hideAll();
-
-        document.querySelectorAll('.navbarButton').forEach(button => {
-            button.addEventListener('click', (e) => handleNavbarClick(e));
-        });
-
-        document.querySelectorAll('.sidebarButton').forEach(button => {
-            button.addEventListener('click', (e) => handleSidebarButton(e));
-        });
-
-        const defaultHome = document.getElementById('defaultHome');
-        defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
-
-        const default4Weeks = document.getElementById('default4Weeks');
-        default4Weeks && handleButtonClick({ target: default4Weeks }, 'navbar');
-        showHomeContent('shortTermHome');
-    }
-
-    function handleSidebarButton(event) {
-        handleButtonClick(event, 'sidebar');
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-home')) {
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                showHomeContent('shortTermHome');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                showHomeContent('mediumTermHome');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                showHomeContent('longTermHome');
-            } 
-        }
-
-        if (event.target.classList.contains('fa-music')) {
-            // Show default short-term tracks if the "Tracks" button is clicked
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                showTrackContent('shortTermTracks');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                showTrackContent('mediumTermTracks');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                showTrackContent('longTermTracks');
-            } 
-        }
-        if (event.target.classList.contains('fa-user')){
-            // Hide all tracks when any other sidebar button is clicked
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                showArtistContent('shortTermArtists');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                showArtistContent('mediumTermArtists');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                showArtistContent('longTermArtists');
-            } 
-        }
-    }
-
-    function handleNavbarClick(event) {
-        handleButtonClick(event, 'navbar');
-
-        // Ensure "Top Tracks" is active before changing content
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-home')) {
-            if (event.target.id === 'default4Weeks') {
-                showHomeContent('shortTermHome');
-            } else if (event.target.textContent.includes('6 MONTHS')) {
-                showHomeContent('mediumTermHome');
-            } else if (event.target.textContent.includes('ALL-TIME')) {
-                showHomeContent('longTermHome');
-            }
-        }
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-user')) {
-            if (event.target.id === 'default4Weeks') {
-                showArtistContent('shortTermArtists');
-            } else if (event.target.textContent.includes('6 MONTHS')) {
-                showArtistContent('mediumTermArtists');
-            } else if (event.target.textContent.includes('ALL-TIME')) {
-                showArtistContent('longTermArtists');
-            }
-        }
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('fa-music')) {
-            if (event.target.id === 'default4Weeks') {
-                showTrackContent('shortTermTracks');
-            } else if (event.target.textContent.includes('6 MONTHS')) {
-                showTrackContent('mediumTermTracks');
-            } else if (event.target.textContent.includes('ALL-TIME')) {
-                showTrackContent('longTermTracks');
-            }
-        }
-    }
-    </script>
-
-    <div class="sidebar">
+<body>
+    <header class="homepageTopbar">
         <div class="logo">
-            <a href="#">
-                <img src="{{ url_for('static', filename='img/logoWriting.png') }}" alt="logo" />
-            </a>
+            <button class="fa-solid fa-headphones">&nbsp;&nbsp;Spotistics</button>
         </div>
 
-        <div class="navigation">
+        <nav class="navbar">
+            <button id="home-link">Home</button>
+            <button id="about-link">About</button>
+            <button id="contact-link">Contact</button>
+        </nav>
+
+        <div class="homepageLoginBtn">
             <ul>
-                <li>
-                    <button id="defaultHome" class="sidebarButton fa fa-home" onclick="handleSidebarButton(event)">   Home
-                    </button>
-                </li>
-                <li>
-                    <button class="sidebarButton fa-solid fa-user" onclick="handleSidebarButton(event)">  Top Artists
-                    </button>
-                </li>
-                <li>
-                    <button class="sidebarButton fa-solid fa-music" onclick="handleSidebarButton(event)">  Top Tracks
-                    </button>
-                </li>
+                <li><a href="{{ url_for('homepage') }}"><i class="fa-solid fa-circle-user"></i>&nbsp;&nbsp;Log in</a></li>
             </ul>
         </div>
+    </header>
 
-        <div class="policies">
-            <ul>
-                <li>
-                    <a href="#">Cookies</a>
-                </li>
-                <li>
-                    <a href="#">Privacy</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <main class="main-container">
+        <section class="home" id="home">
+            <div class="text">
+                <h1>YOUR Stats.</h1>
+                <p>Welcome to <b>Spotistics</b>, where you can explore your personal music journey!
+                   Discover your top tracks, favorite artists, and most-loved genres from the past.
+                   Relive the highlights of your listening history and see how your tastes have evolved over time.
+                </p>
+            </div>
+            <div class="imageContainer">
+                <img src="/static/img/acidRap.png" alt="Acid Rap Album Cover">
+                <img src="/static/img/abbeyRoad.jpg" alt="Abbey Road Album Cover">
+                <img src="/static/img/trapsouljpg.jpg" alt="Trapsoul Album Cover">
+                <img src="/static/img/2014foresthillsdrive.jpg" alt="2014 Forest Hills Drive Album Cover">
+                <img src="/static/img/nothingWasTheSame.jpg" alt="Nothing Was The Same Album Cover">
+                <img src="/static/img/aloneAtProm.jpg" alt="Alone At Prom Album Cover">
+                <img src="/static/img/gkmc.jpg" alt="Good Kid, M.A.A.D City Album Cover">
+                <img src="/static/img/graduationAlbumCover.jpg" alt="Graduation Album Cover">
+            </div>
+        </section>
 
-    <div class="main-container">
-        <div class="topbar">
-            <div class="navbar">
+        <section class="about" id="about">
+            <div class="message">
+                <h1>How To Use</h1>
+                <p>Simply log in with your Spotify credentials to explore your personalized music statistics.
+                    View your top artists or tracks, and choose from three time ranges:
+                    the past month, the last 6 months, or all time.
+                    Discover trends in your listening habits and enjoy insights into your favorite music over time.
+                </p>
+                <p>Switch views on the left side bar to view your home, top artists, top tracks, or top genres.</p>
+                <p>Change time frame on the top bar to view your statistics in the past month, 6 months, or all-time.</p>
+            </div>
+            <div class="exampleImages">
+                <img src="/static/img/exampleImage1.png" alt="Example Image 1">
+                <img src="/static/img/exampleImage2.png" alt="Example Image 2">
+            </div>
+        </section>
+
+        <section class="terms-of-use" style="display: none;">
+            <div class="terms-text">
+                <h1>Terms of Use</h1>
+                <p>This is a block of text about the terms</p>
+            </div>
+        </section>
+
+        <section class="privacy-policy" style="display: none;">
+            <div class="privacy-text">
+                <h1>Privacy Policy</h1>
+                <h3>Data Collection</h3>
+                <p>We use Spotify authentication to access your data. 
+                    This process allows us to retrieve information about your Spotify account, 
+                     specifically your played tracks.</p>
+
+                <h3>Data Usage</h3>
+                <p>The data we collect is solely used to display your Spotify listening statistics, such as top tracks and artists. 
+                    We do not modify, store, or use your data for any other purposes.</p>
+
+                <h3>Data Disclosure</h3>
+                <p>We do not share, sell, or disclose your data to any third parties. 
+                    Your information remains private and is not provided to any external organizations or individuals.</p>
+
+                <h3>Purpose</h3>
+                <p>This website serves only as a platform to display your Spotify statistics. 
+                    No additional processing or data handling occurs beyond what is necessary to present your listening history.</p>
+                
+                <h3>Data Security</h3>
+                <p>We take reasonable measures to ensure that your data is accessed securely through Spotify's authentication system. 
+                    However, as this website is intended purely for display purposes, no sensitive data is stored.</p>
+            </div>
+        </section>
+
+        <footer class="contact" id="contact">
+            <div class="usage">
                 <ul>
-                    <li><button id="default4Weeks" class="navbarButton 4Weeks" onclick="handleNavbarClick(event)">4 WEEKS</button></li>
-                    <li><button class="navbarButton 6Months" onclick="handleNavbarClick(event)">6 MONTHS</button></li>
-                    <li><button class="navbarButton Alltime" onclick="handleNavbarClick(event)">ALL-TIME</button></li>
+                    <li><a href="#Terms-of-Use">Terms of Use</a></li>
+                    <li><a href="#Privacy-Policy">Privacy Policy</a></li>
+                    <li><a>&copy; 2024 - Spotistics, All rights reserved</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="containerContents">
-            <div id="shortTermTrackIcons" class="trackIcons">
-                {{ trackIcons(shortTermTracks['items'], 'shortTermTrackIcons', 'LAST MONTH') }}
+            <div class="contact-icons">
+                <ul>
+                    <li><a href="https://github.com/kirstensotelo" target="_blank" class="fa-brands fa-github"></a></li>
+                    <li><a href="https://www.linkedin.com/in/kirstensotelo/" target="_blank" class="fa-brands fa-linkedin"></a></li>
+                    <li><a href="#" class="fa-brands fa-google"></a></li>
+                </ul>
             </div>
-            <div id="mediumTermTrackIcons" class="trackIcons">
-                {{ trackIcons(mediumTermTracks['items'], 'mediumTermTrackIcons', 'LAST 6 MONTHS') }}
-            </div>
-            <div id="longTermTrackIcons" class="trackIcons">
-                {{ trackIcons(longTermTracks['items'], 'longTermTrackIcons', 'ALL TIME') }}
-            </div>
-            <div id="shortTermTrackTable" class="trackTable">
-                {{ trackTable(shortTermTracks['items'], 'shortTermTrackTable', 'LAST MONTH') }}
-            </div>
-            <div id="mediumTermTrackTable" class="trackTable">
-                {{ trackTable(mediumTermTracks['items'], 'mediumTermTrackTable', 'LAST 6 MONTHS') }}
-            </div>
-            <div id="longTermTrackTable" class="trackTable">
-                {{ trackTable(longTermTracks['items'], 'longTermTrackTable', 'ALL TIME') }}
-            </div>
+    
 
+        </footer>
+    </main>
 
+    <script>
+        document.getElementById("home-link").addEventListener("click", function() {
+            // Scroll to the top of the page (home section)
+            document.getElementById("home").scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
 
-            <div id="shortTermArtistIcons" class="artistIcons">
-                {{ artistIcons(shortTermArtists['items'], 'shortTermArtistIcons', 'LAST MONTH') }}
-            </div>
-            <div id="mediumTermArtistIcons" class="artistIcons">
-                {{ artistIcons(mediumTermArtists['items'], 'mediumTermArtistIcons', 'LAST 6 MONTHS') }}
-            </div>
-            <div id="longTermArtistIcons" class="artistIcons">
-                {{ artistIcons(longTermArtists['items'], 'longTermArtistIcons', 'ALL TIME') }}
-            </div>
+        document.getElementById("about-link").addEventListener("click", function() {
+            // Scroll to the about section
+            document.getElementById("about").scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
 
-            <div id="shortTermArtistTable" class="trackTable">
-                {{ artistTable(shortTermArtists['items'], 'shortTermArtistTable', 'LAST MONTH') }}
-            </div>
-            <div id="mediumTermArtistTable" class="trackTable">
-                {{ artistTable(mediumTermArtists['items'], 'mediumTermArtistTable', 'LAST 6 MONTHS') }}
-            </div>
-            <div id="longTermArtistTable" class="trackTable">
-                {{ artistTable(longTermArtists['items'], 'longTermArtistTable', 'ALL TIME') }}
-            </div>
+        document.getElementById("contact-link").addEventListener("click", function() {
+            // Scroll to the contact section
+            document.getElementById("contact").scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
 
-            <div id="shortTermHomeArtistIcons" class="artistIcons">
-                {{ artistIcons(shortTermArtists['items'], 'shortTermArtistIcons', 'LAST MONTH') }}
-            </div>
-        </div>
-    </div>
+    // Function to hide all sections and only show the 'usage' section
+    function showTermsOfUseOnly() {
+        // Hide all main sections
+        document.querySelector('.home').style.display = 'none';
+        document.querySelector('.about').style.display = 'none';
+        document.querySelector('.privacy-policy').style.display = 'none';
+        document.querySelector('.contact').style.display = 'grid';
+
+        // display the topbar and login button
+        document.querySelector('.homepageTopbar').style.display = 'grid';
+
+        // Display only the terms-of-use section
+        document.querySelector('.terms-of-use').style.display = 'flex';
+        document.querySelector('.usage').style.display = 'block';
+    }
+
+    function showPrivacyPolicyOnly() {
+        // Hide all main sections
+        document.querySelector('.home').style.display = 'none';
+        document.querySelector('.about').style.display = 'none';
+        document.querySelector('.contact').style.display = 'grid';
+        document.querySelector('.terms-of-use').style.display = 'none';
+
+        // Hide the topbar and login button
+        document.querySelector('.homepageTopbar').style.display = 'grid';
+
+        // Display only the terms-of-use section
+        document.querySelector('.usage').style.display = 'block';
+        document.querySelector('.privacy-policy').style.display = 'flex';
+    }
+
+    // Add event listener for 'Terms of Use' link
+    document.querySelector(".usage a[href='#Terms-of-Use']").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        showTermsOfUseOnly();
+    });
+
+    document.querySelector(".usage a[href='#Privacy-Policy']").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        showPrivacyPolicyOnly();
+    });
+
+    // Add event listener for a "Back to Home" button (optional)
+    // You can add a button to return to the home page
+    document.getElementById("home-link").addEventListener("click", function() {
+        // Show all sections again and hide the current 'usage'
+        document.querySelector('.home').style.display = 'flex';
+        document.querySelector('.about').style.display = 'flex';
+        document.querySelector('.contact').style.display = 'grid';
+        document.querySelector('.homepageTopbar').style.display = 'grid';
+        document.querySelector('.terms-of-use').style.display = 'none';
+        document.querySelector('.privacy-policy').style.display = 'none';
+        document.querySelector('.terms').style.display = 'flex';
+
+        // Scroll to the home section smoothly
+        document.getElementById("home").scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+
+    </script>
 </body>
 </html>

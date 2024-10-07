@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = os.urandom(64)
 CLIENT_ID = '9381c03b50ff4dd0b5dd1960e41f905f'
 CLIENT_SECRET = 'b9a1e77140c04e1b8262370a653f0f58'
 redirect_uri = 'http://localhost:5000/callback'
-scope = 'user-top-read user-library-read'
+scope = 'user-library-read user-top-read'
 cache_handler = FlaskSessionCacheHandler(session)
 
 sp_oauth = SpotifyOAuth(
@@ -26,75 +26,33 @@ sp_oauth = SpotifyOAuth(
 )
 sp = Spotify(auth_manager=sp_oauth)
 
+# DEFAULT PAGE BEFORE LOGGING IN
 @app.route('/')
-def hello_world():
-    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
-        auth_url = sp_oauth.get_auth_response()
-        return redirect(auth_url)
+def index():
+    return render_template("index.html")
     
-
-    current_user_name = sp.current_user()['display_name']
-
-    # USER TOP TRACKS
-    shortTermTracks = sp.current_user_top_tracks(
-        limit=25,
-        offset=0,
-        time_range="short_term"
-    )
-
-    mediumTermTracks = sp.current_user_top_tracks(
-        limit=25,
-        offset=0,
-        time_range="medium_term"
-    )
-
-    longTermTracks = sp.current_user_top_tracks(
-        limit=25,
-        offset=0,
-        time_range="long_term"
-    )
-
-    # USER TOP ARTISTS
-    shortTermArtists = sp.current_user_top_artists(
-        limit=25,
-        offset=0,
-        time_range="short_term"
-    )
-
-    mediumTermArtists = sp.current_user_top_artists(
-        limit=25,
-        offset=0,
-        time_range="medium_term"
-    )
-
-    longTermArtists = sp.current_user_top_artists(
-        limit=25,
-        offset=0,
-        time_range="long_term"
-    )
     
-    return render_template('index.html', user_display_name=current_user_name, shortTermTracks=shortTermTracks, mediumTermTracks=mediumTermTracks, longTermTracks=longTermTracks, shortTermArtists=shortTermArtists, mediumTermArtists=mediumTermArtists, longTermArtists=longTermArtists, currentTime=gmtime())
-
-# LOGIN PAGE
-@app.route('/login')
-def login():
-    #If NOT logged in
-    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
-        auth_url = sp_oauth.get_authorize_url()
-        return redirect(auth_url)
-    return redirect(url_for('topTracks'))
 
 # FOR REFRESHING PAGE
 @app.route('/callback')
 def callback():
-    sp_oauth.get_access_token(request.args['code'])
+    sp_oauth.get_access_token(request.args['code']) # GETS SPOTIFY ACCESS TOKEN
     return redirect(url_for('homepage'))
+
+# FOR REFRESHING PAGE
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 #If NOT logged in
 @app.route('/homepage')
 def homepage():
-    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
-        auth_url = sp_oauth.get_auth_response()
+    if sp_oauth.validate_token(cache_handler.get_cached_token()): # IF ALREADY VALIDATED
+        pass
+    else:
+        auth_url = sp_oauth.get_auth_response() #OPENS THE SPOTIFY LOGIN SCREEN
+        render_template('index.html')
         return redirect(auth_url)
     
     current_user_name = sp.current_user()['display_name']
@@ -135,65 +93,7 @@ def homepage():
         time_range="long_term"
     )
     
-    return render_template('index.html', user_display_name=current_user_name, shortTermTracks=shortTermTracks, mediumTermTracks=mediumTermTracks, longTermTracks=longTermTracks, shortTermArtists=shortTermArtists, mediumTermArtists=mediumTermArtists, longTermArtists=longTermArtists, currentTime=gmtime())
-
-# AFTER LOGGING IN
-@app.route('/topTracks')
-def topTracks():
-    #If NOT logged in
-    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
-        auth_url = sp_oauth.get_auth_response()
-        return redirect(auth_url)
-    
-    current_user_name = sp.current_user()['display_name']
-    short_term = sp.current_user_top_tracks(
-        limit=25,
-        offset=0,
-        time_range="short_term"
-    )
-
-    medium_term = sp.current_user_top_tracks(
-        limit=25,
-        offset=0,
-        time_range="medium_term"
-    )
-
-    long_term = sp.current_user_top_tracks(
-        limit=25,
-        offset=0,
-        time_range="long_term"
-    )
-
-    return render_template('topTracks.html', user_display_name=current_user_name, short_term=short_term, medium_term=medium_term, long_term=long_term, currentTime=gmtime())
-
-# DOESNT WORK
-@app.route('/topArtists')
-def topArtists():
-    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
-        auth_url = sp_oauth.get_auth_response()
-        return redirect(auth_url)
-    
-    current_user_name = sp.current_user()['display_name']
-
-    short_term = sp.current_user_top_artists(
-        limit=10,
-        offset=0,
-        time_range="short_term"
-    )
-
-    medium_term = sp.current_user_top_artists(
-        limit=10,
-        offset=0,
-        time_range="medium_term"
-    )
-
-    long_term = sp.current_user_top_artists(
-        limit=10,
-        offset=0,
-        time_range="long_term"
-    )
-    
-    return render_template('topArtists.html', user_display_name=current_user_name, short_term=short_term, medium_term=medium_term, long_term=long_term, currentTime=gmtime())
+    return render_template('homepage.html', user_display_name=current_user_name, shortTermTracks=shortTermTracks, mediumTermTracks=mediumTermTracks, longTermTracks=longTermTracks, shortTermArtists=shortTermArtists, mediumTermArtists=mediumTermArtists, longTermArtists=longTermArtists, currentTime=gmtime())
 
 @app.template_filter('strftime')
 def _jinja2_filter_datetime(date, fmt=None):
@@ -225,11 +125,6 @@ def format_followers(genres):
     genre_string = ''.join(genres)
     capitalized_genre = genre_string.title()
     return capitalized_genre
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
