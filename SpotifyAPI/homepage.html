@@ -20,187 +20,192 @@
     {% from "artistTable.html" import artistTable with context %}
 
     <script>
-    let activeButton = { navbar: null, sidebar: null };
-
-    function hideAll() {
-    [
-        'shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 
-        'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable',
-        'shortTermArtistIcons', 'mediumTermArtistIcons', 'longTermArtistIcons',
-        'shortTermArtistTable', 'mediumTermArtistTable', 'longTermArtistTable',
-        "shortTermHome", "mediumTermHome", "longTermHome"
-    ].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.style.display = 'none';
+        let activeButton = { navbar: null, sidebar: null };
+        
+        function hideAll() {
+            [
+                'shortTermTrackIcons', 'mediumTermTrackIcons', 'longTermTrackIcons', 
+                'shortTermTrackTable', 'mediumTermTrackTable', 'longTermTrackTable',
+                'shortTermArtistIcons', 'mediumTermArtistIcons', 'longTermArtistIcons',
+                'shortTermArtistTable', 'mediumTermArtistTable', 'longTermArtistTable',
+                "shortTermHome", "mediumTermHome", "longTermHome"
+            ].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
         }
-    });
-}
-
-    function showTrackContent(id) {
-        const contentIds = {
-            'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
-            'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
-            'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable'],
-        };
-
-        hideAll();
-        contentIds[id]?.forEach(contentId => {
-            document.getElementById(contentId).style.display = 'inline-block';
-        });
-    }
-
-    function showArtistContent(id) {
-        const contentIds = {
-            'shortTermArtists': ['shortTermArtistIcons', 'shortTermArtistTable'],
-            'mediumTermArtists': ['mediumTermArtistIcons', 'mediumTermArtistTable'],
-            'longTermArtists': ['longTermArtistIcons', 'longTermArtistTable'],
-        };
-
-        hideAll();
-        contentIds[id]?.forEach(contentId => {
-            document.getElementById(contentId).style.display = 'inline-block';
-        });
-    }
-
-    function showHomeContent(id) {
-        const contentIds = {
-            'shortTermHome': ['shortTermArtistIcons', 'shortTermTrackIcons'],
-            'mediumTermHome': ['mediumTermArtistIcons', 'mediumTermTrackIcons'],
-            'longTermHome': ['longTermArtistIcons', 'longTermTrackIcons'],
-        };
-
-        hideAll();
-        contentIds[id]?.forEach(contentId => {
-            document.getElementById(contentId).style.display = 'inline-block';
-        });
-    }
-
-    function handleButtonClick(event, type) {
-        if (activeButton[type] && activeButton[type] !== event.target) {
-            activeButton[type].classList.remove('active');
+        
+        function showTrackContent(id) {
+            const contentIds = {
+                'shortTermTracks': ['shortTermTrackIcons', 'shortTermTrackTable'],
+                'mediumTermTracks': ['mediumTermTrackIcons', 'mediumTermTrackTable'],
+                'longTermTracks': ['longTermTrackIcons', 'longTermTrackTable'],
+            };
+        
+            hideAll();
+            contentIds[id]?.forEach(contentId => {
+                document.getElementById(contentId).style.display = 'inline-block';
+            });
         }
-
-        event.target.classList.add('active');
-        activeButton[type] = event.target;
-    }
-
-    function initializePage() {
-        hideAll();
-
-        document.querySelectorAll('.navbarButton').forEach(button => {
-            button.addEventListener('click', (e) => handleNavbarClick(e));
-        });
-
-        document.querySelectorAll('.sidebarButton').forEach(button => {
-            button.addEventListener('click', (e) => handleSidebarButton(e));
-        });
-
-        const defaultHome = document.getElementById('defaultHome');
-        defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
-
-        const default4Weeks = document.getElementById('default4Weeks');
-        default4Weeks && handleButtonClick({ target: default4Weeks }, 'navbar');
-        showHomeContent('shortTermHome');
-    }
-
-    function handleSidebarButton(event) {
-        handleButtonClick(event, 'sidebar');
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('homeButton')) {
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                showHomeContent('shortTermHome');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                showHomeContent('mediumTermHome');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                showHomeContent('longTermHome');
-            } 
+        
+        function showArtistContent(id) {
+            const contentIds = {
+                'shortTermArtists': ['shortTermArtistIcons', 'shortTermArtistTable'],
+                'mediumTermArtists': ['mediumTermArtistIcons', 'mediumTermArtistTable'],
+                'longTermArtists': ['longTermArtistIcons', 'longTermArtistTable'],
+            };
+        
+            hideAll();
+            contentIds[id]?.forEach(contentId => {
+                document.getElementById(contentId).style.display = 'inline-block';
+            });
         }
-
-        if (event.target.classList.contains('topArtistsButton')){
-            // Hide all tracks when any other sidebar button is clicked
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                showArtistContent('shortTermArtists');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                showArtistContent('mediumTermArtists');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                showArtistContent('longTermArtists');
-            } 
+        
+        function showHomeContent(id) {
+            const contentIds = {
+                'shortTermHome': ['shortTermArtistIcons', 'shortTermTrackIcons'],
+                'mediumTermHome': ['mediumTermArtistIcons', 'mediumTermTrackIcons'],
+                'longTermHome': ['longTermArtistIcons', 'longTermTrackIcons'],
+            };
+        
+            hideAll();
+            contentIds[id]?.forEach(contentId => {
+                document.getElementById(contentId).style.display = 'inline-block';
+            });
         }
-
-        if (event.target.classList.contains('topTracksButton')) {
-            // Show default short-term tracks if the "Tracks" button is clicked
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                showTrackContent('shortTermTracks');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                showTrackContent('mediumTermTracks');
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                showTrackContent('longTermTracks');
-            } 
+        
+        function handleButtonClick(event, type) {
+            if (activeButton[type] && activeButton[type] !== event.target) {
+                activeButton[type].classList.remove('active');
+            }
+        
+            event.target.classList.add('active');
+            activeButton[type] = event.target;
         }
-
-        if (event.target.classList.contains('topGenresButton')) {
-            // Show default short-term tracks if the "Tracks" button is clicked
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')){
-                hideAll();
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')){
-                hideAll();
-            } 
-            if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')){
-                hideAll();
-            } 
+        
+        function initializePage() {
+            hideAll();
+        
+            // Use event delegation for sidebar buttons
+            document.querySelector('.navigation ul').addEventListener('click', (event) => {
+                const button = event.target.closest('button'); // Find the closest button
+                if (button) {
+                    handleSidebarButton({ target: button });
+                }
+            });
+        
+            document.querySelectorAll('.navbarButton').forEach(button => {
+                button.addEventListener('click', (e) => handleNavbarClick(e));
+            });
+        
+            const defaultHome = document.getElementById('defaultHome');
+            defaultHome && handleButtonClick({ target: defaultHome }, 'sidebar');
+        
+            const default4Weeks = document.getElementById('default4Weeks');
+            default4Weeks && handleButtonClick({ target: default4Weeks }, 'navbar');
+            showHomeContent('shortTermHome');
         }
-    }
-
-    function handleNavbarClick(event) {
-        handleButtonClick(event, 'navbar');
-
-        // Ensure "Top Tracks" is active before changing content
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('homeButton')) {
-            if (event.target.id === 'default4Weeks') {
-                showHomeContent('shortTermHome');
-            } else if (event.target.textContent.includes('6 Months')) {
-                showHomeContent('mediumTermHome');
-            } else if (event.target.textContent.includes('All-Time')) {
-                showHomeContent('longTermHome');
+        
+        function handleSidebarButton(event) {
+            handleButtonClick(event, 'sidebar');
+            if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('homeButton')) {
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')) {
+                    showHomeContent('shortTermHome');
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')) {
+                    showHomeContent('mediumTermHome');
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')) {
+                    showHomeContent('longTermHome');
+                } 
+            }
+        
+            if (event.target.classList.contains('topArtistsButton')) {
+                // Hide all tracks when any other sidebar button is clicked
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')) {
+                    showArtistContent('shortTermArtists');
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')) {
+                    showArtistContent('mediumTermArtists');
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')) {
+                    showArtistContent('longTermArtists');
+                } 
+            }
+        
+            if (event.target.classList.contains('topTracksButton')) {
+                // Show default short-term tracks if the "Tracks" button is clicked
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')) {
+                    showTrackContent('shortTermTracks');
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')) {
+                    showTrackContent('mediumTermTracks');
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')) {
+                    showTrackContent('longTermTracks');
+                } 
+            }
+        
+            if (event.target.classList.contains('topGenresButton')) {
+                // Show default short-term tracks if the "Tracks" button is clicked
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('4Weeks')) {
+                    hideAll();
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('6Months')) {
+                    hideAll();
+                } 
+                if (activeButton['sidebar'] && activeButton['navbar'].classList.contains('Alltime')) {
+                    hideAll();
+                } 
             }
         }
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('topArtistsButton')) {
-            if (event.target.id === 'default4Weeks') {
-                showArtistContent('shortTermArtists');
-            } else if (event.target.textContent.includes('6 Months')) {
-                showArtistContent('mediumTermArtists');
-            } else if (event.target.textContent.includes('All-Time')) {
-                showArtistContent('longTermArtists');
+        
+        function handleNavbarClick(event) {
+            handleButtonClick(event, 'navbar');
+        
+            // Ensure "Top Tracks" is active before changing content
+            if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('homeButton')) {
+                if (event.target.id === 'default4Weeks') {
+                    showHomeContent('shortTermHome');
+                } else if (event.target.textContent.includes('6 Months')) {
+                    showHomeContent('mediumTermHome');
+                } else if (event.target.textContent.includes('All-Time')) {
+                    showHomeContent('longTermHome');
+                }
+            }
+            if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('topArtistsButton')) {
+                if (event.target.id === 'default4Weeks') {
+                    showArtistContent('shortTermArtists');
+                } else if (event.target.textContent.includes('6 Months')) {
+                    showArtistContent('mediumTermArtists');
+                } else if (event.target.textContent.includes('All-Time')) {
+                    showArtistContent('longTermArtists');
+                }
+            }
+            if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('topTracksButton')) {
+                if (event.target.id === 'default4Weeks') {
+                    showTrackContent('shortTermTracks');
+                } else if (event.target.textContent.includes('6 Months')) {
+                    showTrackContent('mediumTermTracks');
+                } else if (event.target.textContent.includes('All-Time')) {
+                    showTrackContent('longTermTracks');
+                }
+            }
+        
+            if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('topGenresButton')) {
+                if (event.target.id === 'default4Weeks') {
+                    hideAll();
+                } else if (event.target.textContent.includes('6 Months')) {
+                    hideAll();
+                } else if (event.target.textContent.includes('All-Time')) {
+                    hideAll();
+                }
             }
         }
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('topTracksButton')) {
-            if (event.target.id === 'default4Weeks') {
-                showTrackContent('shortTermTracks');
-            } else if (event.target.textContent.includes('6 Months')) {
-                showTrackContent('mediumTermTracks');
-            } else if (event.target.textContent.includes('All-Time')) {
-                showTrackContent('longTermTracks');
-            }
-        }
-
-        if (activeButton['sidebar'] && activeButton['sidebar'].classList.contains('topGenresButton')) {
-            if (event.target.id === 'default4Weeks') {
-                hideAll();
-            } else if (event.target.textContent.includes('6 Months')) {
-                hideAll();
-            } else if (event.target.textContent.includes('All-Time')) {
-                hideAll();
-            }
-        }
-    }
-    </script>
+        </script>
+        
 
     <div class="sidebar">
         <div class="logo">
@@ -211,22 +216,22 @@
             <ul>
                 <li>
                     <button id="defaultHome" class="sidebarButton homeButton"onclick="handleSidebarButton(event)">
-                        <i class = "fa fa-home"></i> Home
+                        <i class = "fa fa-home"></i> <span class="display-top">Home</span>
                     </button>
                 </li>
                 <li>
                     <button class="sidebarButton topArtistsButton" onclick="handleSidebarButton(event)">
-                        <i class = "fa-solid fa-user"></i> Top Artists
+                        <i class = "fa-solid fa-user"></i> <span class="display-top">Top Artists</span>
                     </button>
                 </li>
                 <li>
                     <button class="sidebarButton topTracksButton" onclick="handleSidebarButton(event)">
-                        <i class = "fa-solid fa-music"></i> Top Tracks
+                        <i class = "fa-solid fa-music"></i> <span class="display-top">Top Tracks</span>
                     </button>
                 </li>
                 <li>
                     <button class="sidebarButton topGenresButton" onclick="handleSidebarButton(event)">
-                        <i class = "fa-solid fa-chart-bar"></i> Top Genres
+                        <i class = "fa-solid fa-chart-bar"></i> <span class="display-top">Top Genres</span>
                     </button>
                     
                 </li>
@@ -259,7 +264,7 @@
 
         <div class="dropdown">
             <button class="user">
-                <i class = "fa-solid fa-circle-user"></i>&nbsp&nbsp{{ user_display_name }}
+                <i class = "fa-solid fa-circle-user"></i><span class="display-name">&nbsp&nbsp{{ user_display_name }}</span>
             </button>
             <div class="dropdown-content">
                 <a href="logout">Log out</a>

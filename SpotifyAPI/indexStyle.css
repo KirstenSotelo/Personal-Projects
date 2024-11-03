@@ -231,27 +231,49 @@ body {
     margin: 0 15px;
 }
 
+.terms-of-use {
+    background-image: url('../img/aboutBackground.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.privacy-policy {
+    background-image: url('../img/homeBackground.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
 .terms-of-use, .privacy-policy {
-    padding: 80px 20px 40px;
+    min-height: 100vh;
+    padding: 80px 40px 40px;
     color: #fff;
 }
 
 .terms-of-use .terms-text, .privacy-policy .privacy-text {
+    width: 100%;
+    text-align: left;
+    padding-top: 20px;
     margin: 0 auto;
 }
 
-.privacy-policy .privacy-text h1 {
+.privacy-policy .privacy-text h1, .terms-of-use .terms-text h1 {
     font-size: 36px;
     margin-bottom: 30px;
 }
 
-.privacy-policy .privacy-text h3 {
+.privacy-policy .privacy-text h3, .terms-of-use .terms-text h3 {
     font-size: 24px;
     margin-top: 30px;
     margin-bottom: 15px;
 }
 
-.privacy-policy .privacy-text p {
+.privacy-policy .privacy-text p, .terms-of-use .terms-text p {
     margin-bottom: 20px;
     line-height: 1.6;
 }
@@ -305,7 +327,7 @@ body {
         display: grid;
         grid-template-columns: repeat(2, 2fr);
         padding: 10px 0;
-        height: 20%;
+        height: 18%;
     }
 
     .homepageTopbar .logo {
@@ -402,5 +424,9 @@ body {
         padding-bottom: 20px;
         padding-left: 10px;
         padding-right: 10px;
+    }
+
+    .terms-of-use, .privacy-policy {
+        padding-top: 180    px;
     }
 }
