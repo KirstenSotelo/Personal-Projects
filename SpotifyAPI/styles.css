@@ -5,9 +5,13 @@
 }
 
 body {
-    background: linear-gradient(135deg, #060606 0%, #3A3A3A 100%);
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/homepageBackground.png');
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -220,9 +224,11 @@ body {
 
 .topbar .navbar ul li .navbarButton.active {
     height: 100%; /* Keep the height consistent when active */
-    background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(6,6,6,0) 100%);
+    background: linear-gradient(180deg, rgb(70, 35, 120) 0%, rgba(255, 255, 255, 0) 50%);
     width: 100%;
     color: #ffffff;
+    font-weight: bolder;
+    font-size: 16px;
     /* background-color: #1f1f1f; */
     transform: translateY(0px);
   }
@@ -269,7 +275,7 @@ body {
 }
 
 .trackIcons .spotify-icons .list .item:hover{
-    background-color: #252525;
+    background-color: #e84de830;
 }
 
 .trackIcons .spotify-icons .list .item img{
@@ -329,16 +335,16 @@ body {
 }
 
 .trackTable tr.tableItems:nth-child(odd) {
-	background-color: #222222;
+	background-color: #a944a940;
 }
 
 .trackTable tr.tableItems:nth-child(odd):hover {
-	background-color: #323232;
+	background-color: #a944a980;
     transition: 0.2s all;
 }
 
 .trackTable tr.tableItems:nth-child(even):hover {
-	background-color: #2c2c2c;
+	background-color: #a944a920;
 }
 
 .trackTable .rank {
@@ -384,7 +390,7 @@ body {
 }
 
 .artistIcons .spotify-icons .list .item:hover{
-    background-color: #252525;
+    background-color: #e84de830;
 }
 
 .artistIcons .spotify-icons .list .item img{
@@ -436,7 +442,7 @@ body {
 }
 
 .dropdown .user {
-    background-color: #333333;
+    background-color: #e84de830;
     color: white;
     width: auto;
     height: 3rem;
@@ -449,7 +455,7 @@ body {
 }
 
 .user:hover {
-    background-color: #333333;
+    background-color: #a944a9;
     transition: all ease 0.3s;
 }
 
@@ -465,7 +471,7 @@ body {
 .dropdown-content a {
     position: fixed;
     text-decoration: none;
-    background-color: #2c2c2c;
+    background-color: #a944a9;
     color: white;
     width: auto;
     height: 3rem;
@@ -484,7 +490,7 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #333333;
+    background-color: #a944a9;
     transition: all ease 0.3s;
 }
 
@@ -602,14 +608,14 @@ body {
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 450px) {
     .main-container{
         width: 100%;
     }
     .sidebar {
         position: fixed;
         width: 100%;
-        height: 60px; /* Adjust height to fit the top as a bar */
+        height: 70px; /* Adjust height to fit the top as a bar */
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -640,6 +646,7 @@ body {
     }
 
     .sidebar .navigation ul {
+        height: 100%;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
     }
@@ -651,6 +658,7 @@ body {
     }
 
     .sidebar .navigation .sidebarButton {
+        height: 100%;
         width: 100%;
         transform: translateX(0px);
     }
@@ -759,8 +767,13 @@ body {
     }
 
     .dropdown .user {
+        background-color: #e84de830;
         font-size: 20px;
         width: auto;
+    }
+
+    .dropdown .user:active {
+        background-color: #e84de850;
     }
     
 
@@ -771,8 +784,17 @@ body {
     .dropdown-content a {
         font-size: 8px;
     }
+
+    .trackTable {
+        width: 96%;
+    }
     
     .trackTable .tableItems {
         font-size: 12px;
+        width: 100%;
+    }
+
+    .trackTable .tracks {
+        width: 97.5%;
     }
 }

@@ -293,6 +293,22 @@
         });
     });
 
+    document.getElementById("about-link").addEventListener("click", function() {
+        // Show all sections again and hide the current 'usage'
+        document.querySelector('.home').style.display = 'flex';
+        document.querySelector('.about').style.display = 'flex';
+        document.querySelector('.contact').style.display = 'grid';
+        document.querySelector('.homepageTopbar').style.display = 'grid';
+        document.querySelector('.terms-of-use').style.display = 'none';
+        document.querySelector('.privacy-policy').style.display = 'none';
+        document.querySelector('.terms').style.display = 'flex';
+
+        // Scroll to the home section smoothly
+        document.getElementById("about").scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+
     </script>
 </body>
 </html>
