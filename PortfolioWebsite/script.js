@@ -44,14 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load Feather icons
     feather.replace();
 
-    // Animate timeline items on scroll
-    const timelineItems = document.querySelectorAll('.timeline-item');
+    // Animate timeline entries on scroll
+    const timelineEntries = document.querySelectorAll('.timeline-entry');
     const animateTimeline = () => {
-        timelineItems.forEach(item => {
-            const itemTop = item.getBoundingClientRect().top;
-            const itemBottom = item.getBoundingClientRect().bottom;
-            if (itemTop < window.innerHeight && itemBottom > 0) {
-                item.classList.add('show');
+        timelineEntries.forEach(entry => {
+            const entryTop = entry.getBoundingClientRect().top;
+            const entryBottom = entry.getBoundingClientRect().bottom;
+            if (entryTop < window.innerHeight && entryBottom > 0) {
+                entry.classList.add('show');
             }
         });
     };
@@ -59,25 +59,57 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateTimeline);
     animateTimeline(); // Initial check on page load
 
-    // Adjust timeline item positions based on date
-    const adjustTimelineItemPositions = () => {
+    // Position timeline entries
+    const positionTimelineEntries = () => {
         const timelineStart = 2015;
         const timelineEnd = 2023;
         const timelineDuration = timelineEnd - timelineStart;
+        const timelineEntriesContainer = document.querySelector('.timeline-entries');
+        let lastEndPosition = 0;
 
-        timelineItems.forEach(item => {
-            const startYear = parseInt(item.style.getPropertyValue('--start-year'));
-            const endYear = parseInt(item.style.getPropertyValue('--end-year'));
+        timelineEntries.forEach((entry, index) => {
+            const startYear = parseInt(entry.style.getPropertyValue('--start-year'));
+            const endYear = parseInt(entry.style.getPropertyValue('--end-year'));
             
             const startPosition = ((startYear - timelineStart) / timelineDuration) * 100;
             const endPosition = ((endYear - timelineStart) / timelineDuration) * 100;
-            
-            item.style.left = `${startPosition}%`;
-            item.style.width = `${endPosition - startPosition}%`;
+            const width = endPosition - startPosition;
+
+            entry.style.left = `${startPosition}%`;
+            entry.style.width = `${width}%`;
+
+            if (index > 0 && startPosition < lastEndPosition) {
+                entry.style.top = `${parseInt(timelineEntries[index - 1].style.top || '0') + timelineEntries[index - 1].offsetHeight + 20}px`;
+            } else {
+                entry.style.top = '0px';
+            }
+
+            lastEndPosition = endPosition;
+        });
+
+        timelineEntriesContainer.style.height = `${timelineEntries[timelineEntries.length - 1].offsetTop + timelineEntries[timelineEntries.length - 1].offsetHeight}px`;
+    };
+
+    const positionTimelineDates = () => {
+        const timelineStart = 2015;
+        const timelineEnd = 2023;
+        const timelineDuration = timelineEnd - timelineStart;
+        const timelineDates = document.querySelectorAll('.timeline-date');
+        const timelineWidth = document.querySelector('.timeline-line').offsetWidth;
+
+        timelineDates.forEach((date, index) => {
+            const year = timelineStart + index;
+            const position = ((year - timelineStart) / timelineDuration) * timelineWidth;
+            date.style.left = `${position}px`;
+            date.textContent = year;
         });
     };
 
-    adjustTimelineItemPositions();
-    window.addEventListener('resize', adjustTimelineItemPositions);
+    positionTimelineEntries();
+    positionTimelineDates();
+    window.addEventListener('resize', () => {
+        positionTimelineEntries();
+        positionTimelineDates();
+    });
 });
 
