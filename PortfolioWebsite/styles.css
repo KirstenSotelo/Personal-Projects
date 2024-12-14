@@ -137,7 +137,7 @@
   }
   
   /* Experience section styles */
-  .experience {
+.experience {
     background-color: #f4f4f4;
     padding: 4rem 0;
   }
@@ -147,78 +147,128 @@
     margin-bottom: 2rem;
   }
   
-  .experience-timeline {
+  .timeline {
     position: relative;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 20px 0;
   }
   
-  .experience-timeline::before {
-    content: '';
+  .timeline-line {
     position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .timeline-date {
+    position: relative;
+    font-size: 0.8rem;
+    color: #666;
+    padding-top: 15px;
+  }
+  
+  .timeline-date::before {
+    content: '';
+    position: absolute;
+    top: -7px;
     left: 50%;
-    width: 2px;
-    height: 100%;
-    background: #333;
+    width: 1px;
+    height: 10px;
+    background-color: #333;
     transform: translateX(-50%);
   }
   
-  .experience-item {
+  .timeline-item {
     position: relative;
-    width: calc(50% - 40px);
+    margin: 40px 0;
+    width: calc(100% - 40px);
+    left: 20px;
+  }
+  
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc((var(--start-year) - 2015) / (2023 - 2015) * 100%);
+    width: calc((var(--end-year) - var(--start-year)) / (2023 - 2015) * 100%);
+    height: 20px;
+    background-color: #007bff;
+    opacity: 0.2;
+  }
+  
+  .timeline-content {
+    background-color: white;
     padding: 20px;
-    background: #fff;
-    margin-bottom: 40px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .experience-item:nth-child(odd) {
-    left: 0;
-  }
-  
-  .experience-item:nth-child(even) {
-    left: 50%;
-  }
-  
-  .experience-item::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    right: -40px;
-    width: 20px;
-    height: 20px;
-    background: #333;
-    border-radius: 50%;
-  }
-  
-  .experience-item:nth-child(even)::before {
-    left: -40px;
-  }
-  
-  .experience-item h3 {
+  .timeline-content h3 {
     margin-bottom: 0.5rem;
+    color: #007bff;
   }
   
-  .experience-item h4 {
+  .timeline-content h4 {
     color: #666;
     margin-bottom: 0.5rem;
   }
   
-  .experience-date {
+  .timeline-content .timeline-date {
     font-style: italic;
     color: #888;
     margin-bottom: 1rem;
+    padding-top: 0;
   }
   
-  .experience-item ul {
+  .timeline-content ul {
     padding-left: 20px;
   }
   
-  .experience-item li {
+  .timeline-content li {
     margin-bottom: 0.5rem;
   }
+  
+  /* Animation for timeline items */
+  .timeline-item {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease;
+  }
+  
+  .timeline-item.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .timeline-line {
+      display: none;
+    }
+  
+    .timeline-item {
+      width: 100%;
+      left: 0;
+    }
+  
+    .timeline-item::before {
+      display: none;
+    }
+  
+    .timeline-content {
+      margin-left: 0;
+    }
+  }
+  
+  
+  
+  
   
   /* Projects section styles */
   .projects {
@@ -348,25 +398,29 @@
       justify-content: center;
     }
   
-    .experience-timeline::before {
-      left: 20px;
+    .timeline::after {
+      left: 31px;
     }
   
-    .experience-item {
+    .timeline-item {
       width: 100%;
-      left: 0;
+      padding-left: 70px;
+      padding-right: 25px;
     }
   
-    .experience-item:nth-child(even) {
-      left: 0;
+    .timeline-item::before {
+      left: 60px;
+      border: medium solid white;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent white transparent transparent;
     }
   
-    .experience-item::before {
-      left: 10px;
+    .timeline-item::after {
+      left: 15px;
     }
   
-    .experience-item:nth-child(even)::before {
-      left: 10px;
+    .timeline-item:nth-child(even) {
+      left: 0%;
     }
   }
   

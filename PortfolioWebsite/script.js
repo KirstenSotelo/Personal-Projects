@@ -43,5 +43,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load Feather icons
     feather.replace();
+
+    // Animate timeline items on scroll
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const animateTimeline = () => {
+        timelineItems.forEach(item => {
+            const itemTop = item.getBoundingClientRect().top;
+            const itemBottom = item.getBoundingClientRect().bottom;
+            if (itemTop < window.innerHeight && itemBottom > 0) {
+                item.classList.add('show');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateTimeline);
+    animateTimeline(); // Initial check on page load
+
+    // Adjust timeline item positions based on date
+    const adjustTimelineItemPositions = () => {
+        const timelineStart = 2015;
+        const timelineEnd = 2023;
+        const timelineDuration = timelineEnd - timelineStart;
+
+        timelineItems.forEach(item => {
+            const startYear = parseInt(item.style.getPropertyValue('--start-year'));
+            const endYear = parseInt(item.style.getPropertyValue('--end-year'));
+            
+            const startPosition = ((startYear - timelineStart) / timelineDuration) * 100;
+            const endPosition = ((endYear - timelineStart) / timelineDuration) * 100;
+            
+            item.style.left = `${startPosition}%`;
+            item.style.width = `${endPosition - startPosition}%`;
+        });
+    };
+
+    adjustTimelineItemPositions();
+    window.addEventListener('resize', adjustTimelineItemPositions);
 });
 
