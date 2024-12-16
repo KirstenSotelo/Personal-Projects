@@ -1,6 +1,7 @@
 /* Reset and base styles */
 :root {
   --bg-color: #ffffff;
+  --bg-color-alt: #f8f9fa;
   --text-color: #333333;
   --primary-color: #007bff;
   --secondary-color: #6c757d;
@@ -9,6 +10,7 @@
 
 .dark-theme {
   --bg-color: #333333;
+  --bg-color-alt: #2b2b2b;
   --text-color: #ffffff;
   --primary-color: #4da6ff;
   --secondary-color: #adb5bd;
@@ -17,6 +19,7 @@
 
 .blue-theme {
   --bg-color: #e6f2ff;
+  --bg-color-alt: #d9e9ff;
   --text-color: #00366d;
   --primary-color: #0056b3;
   --secondary-color: #4d94ff;
@@ -78,6 +81,7 @@ nav ul li {
 
 nav ul li a {
   color: var(--text-color);
+  font-weight: bold;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -90,7 +94,7 @@ nav ul li a:hover {
   display: flex;
   gap: 1rem;
   margin-left: 1rem;
-  padding: 10px;
+  padding: 4px;
 }
 
 .theme-button {
@@ -190,7 +194,7 @@ nav ul li a:hover {
 /* About section styles */
 .about {
   padding: 4rem 0;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-alt);
 }
 
 .about h2 {
@@ -252,7 +256,7 @@ nav ul li a:hover {
   bottom: -20px;
   left: 50%;
   width: 2px;
-  height: 12px;
+  height: 24px;
   background-color: var(--secondary-color);
   transform: translateX(-50%);
 }
@@ -269,7 +273,7 @@ nav ul li a:hover {
 }
 
 .timeline-content {
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-alt);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -303,7 +307,7 @@ nav ul li a:hover {
 /* Projects section styles */
 .projects {
   padding: 4rem 0;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-alt);
 }
 
 .projects h2 {
@@ -351,30 +355,6 @@ nav ul li a:hover {
   margin: 1rem;
 }
 
-/* Footer styles */
-footer {
-  background-color: var(--secondary-color);
-  color: var(--bg-color);
-  padding: 2rem 0;
-  text-align: center;
-}
-
-footer .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.social-links {
-  margin-top: 1rem;
-}
-
-.social-links a {
-  color: var(--bg-color);
-  margin: 0 0.5rem;
-  text-decoration: none;
-}
-
 /* Contact section styles */
 .contact {
   padding: 4rem 0;
@@ -408,12 +388,61 @@ footer .container {
   padding: 0.5rem;
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-alt);
   color: var(--text-color);
 }
 
 .form-group textarea {
   height: 150px;
+}
+
+/* Footer styles */
+footer {
+  background-color: var(--bg-color-alt);
+  color: var(--text-color);
+  padding: 1rem 0;
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+.social-links svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Add this media query for responsive footer */
+@media (max-width: 600px) {
+  footer .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 /* Responsive styles */
