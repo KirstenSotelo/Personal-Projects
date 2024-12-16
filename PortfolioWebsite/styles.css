@@ -1,4 +1,28 @@
 /* Reset and base styles */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #28a745;
+}
+
+.dark-theme {
+  --bg-color: #333333;
+  --text-color: #ffffff;
+  --primary-color: #4da6ff;
+  --secondary-color: #adb5bd;
+  --accent-color: #5cb85c;
+}
+
+.blue-theme {
+  --bg-color: #e6f2ff;
+  --text-color: #00366d;
+  --primary-color: #0056b3;
+  --secondary-color: #4d94ff;
+  --accent-color: #00a86b;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +32,8 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 .container {
@@ -20,7 +45,7 @@ body {
 
 /* Header styles */
 header {
-  background-color: #fff;
+  background-color: var(--bg-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
@@ -38,7 +63,7 @@ nav {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -52,18 +77,61 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #666;
+  color: var(--text-color);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: #333;
+  color: var(--primary-color);
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-left: 1rem;
+  padding: 10px;
+}
+
+.theme-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--secondary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-button:hover {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border-color: var(--primary-color);
+}
+
+.theme-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.theme-button.active {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border-color: var(--primary-color);
+}
+
+.theme-button svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* Hero section styles */
 .hero {
-  background-color: #f4f4f4;
+  background-color: var(--bg-color);
   text-align: center;
   padding: 8rem 0 4rem;
 }
@@ -71,11 +139,13 @@ nav ul li a:hover {
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  color: var(--text-color);
 }
 
 .hero-buttons {
@@ -89,27 +159,28 @@ nav ul li a:hover {
 .btn {
   display: inline-flex;
   align-items: center;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  border: 2px solid #333;
+  border: 2px solid var(--primary-color);
 }
 
 .btn:hover {
-  background-color: #555;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .btn-outline {
   background-color: transparent;
-  color: #333;
+  color: var(--primary-color);
 }
 
 .btn-outline:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
 }
 
 .btn svg {
@@ -119,11 +190,13 @@ nav ul li a:hover {
 /* About section styles */
 .about {
   padding: 4rem 0;
+  background-color: var(--bg-color);
 }
 
 .about h2 {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .about-content {
@@ -138,14 +211,14 @@ nav ul li a:hover {
 
 /* Experience section styles */
 .experience {
-  background-color: #f4f4f4;
+  background-color: var(--bg-color);
   padding: 4rem 0;
-  overflow: visible; /* Changed from 'hidden' to 'visible' */
 }
 
 .experience h2 {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .timeline {
@@ -158,7 +231,7 @@ nav ul li a:hover {
 .timeline-line {
   position: relative;
   height: 8px;
-  background-color: #333;
+  background-color: var(--secondary-color);
   margin-bottom: 40px;
   margin-top: 20px;
 }
@@ -168,7 +241,7 @@ nav ul li a:hover {
   top: -25px;
   transform: translateX(-50%);
   font-size: 0.8rem;
-  color: #666;
+  color: var(--text-color);
   width: 40px;
   text-align: center;
 }
@@ -180,13 +253,12 @@ nav ul li a:hover {
   left: 50%;
   width: 2px;
   height: 12px;
-  background-color: #333;
+  background-color: var(--secondary-color);
   transform: translateX(-50%);
 }
 
 .timeline-entries {
   position: relative;
-  overflow: visible;
 }
 
 .timeline-entry {
@@ -197,7 +269,7 @@ nav ul li a:hover {
 }
 
 .timeline-content {
-  background-color: white;
+  background-color: var(--bg-color);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -205,17 +277,17 @@ nav ul li a:hover {
 
 .timeline-content h3 {
   margin-bottom: 0.5rem;
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .timeline-content h4 {
-  color: #666;
+  color: var(--secondary-color);
   margin-bottom: 0.5rem;
 }
 
 .timeline-content .entry-date {
   font-style: italic;
-  color: #888;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
@@ -225,39 +297,19 @@ nav ul li a:hover {
 
 .timeline-content li {
   margin-bottom: 0.5rem;
-}
-
-/* Responsive styles for timeline */
-@media (max-width: 768px) {
-  .timeline-line {
-    display: none;
-  }
-
-  .timeline-entries {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .timeline-entry {
-    position: relative;
-    width: 100%;
-    left: 0;
-    margin-bottom: 20px;
-  }
-
-  .timeline-content {
-    margin-left: 0;
-  }
+  color: var(--text-color);
 }
 
 /* Projects section styles */
 .projects {
   padding: 4rem 0;
+  background-color: var(--bg-color);
 }
 
 .projects h2 {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .project-grid {
@@ -267,7 +319,7 @@ nav ul li a:hover {
 }
 
 .project-card {
-  background-color: #fff;
+  background-color: var(--bg-color);
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -284,11 +336,13 @@ nav ul li a:hover {
 .project-card h3 {
   padding: 1rem;
   margin: 0;
+  color: var(--primary-color);
 }
 
 .project-card p {
   padding: 0 1rem;
   flex-grow: 1;
+  color: var(--text-color);
 }
 
 .project-card .btn {
@@ -299,8 +353,8 @@ nav ul li a:hover {
 
 /* Footer styles */
 footer {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
   padding: 2rem 0;
   text-align: center;
 }
@@ -316,7 +370,7 @@ footer .container {
 }
 
 .social-links a {
-  color: #fff;
+  color: var(--bg-color);
   margin: 0 0.5rem;
   text-decoration: none;
 }
@@ -324,11 +378,13 @@ footer .container {
 /* Contact section styles */
 .contact {
   padding: 4rem 0;
+  background-color: var(--bg-color);
 }
 
 .contact h2 {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 #contact-form {
@@ -343,14 +399,17 @@ footer .container {
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .form-group textarea {
@@ -397,6 +456,16 @@ footer .container {
   .timeline-content {
     margin-left: 0;
   }
+
+  .theme-buttons {
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    background-color: var(--bg-color);
+    padding: 0.5rem;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* Mobile menu styles */
@@ -406,6 +475,7 @@ footer .container {
   border: none;
   font-size: 1rem;
   cursor: pointer;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
@@ -420,7 +490,7 @@ footer .container {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--bg-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
