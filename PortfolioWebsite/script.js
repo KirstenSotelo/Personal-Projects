@@ -188,5 +188,29 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', positionTimelineEntries);
   window.addEventListener('load', positionTimelineEntries);
   positionTimelineEntries();
+
+  // Scroll-triggered animations
+  const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+
+  const animateOnScroll = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver(animateOnScroll, options);
+
+  animatedElements.forEach(element => {
+    observer.observe(element);
+  });
 });
 

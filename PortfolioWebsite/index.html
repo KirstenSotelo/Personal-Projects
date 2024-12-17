@@ -34,9 +34,9 @@
     <main>
         <section id="hero" class="hero">
             <div class="container">
-                <h1>Welcome to My Portfolio</h1>
-                <p>I'm a web developer passionate about creating beautiful and functional websites.</p>
-                <div class="hero-buttons">
+                <h1 class="fade-in">Welcome to My Portfolio</h1>
+                <p class="fade-in">I'm a web developer passionate about creating beautiful and functional websites.</p>
+                <div class="hero-buttons fade-in">
                     <a href="#projects" class="btn">View My Work</a>
                     <a href="/path-to-your-resume.pdf" class="btn btn-outline" download>
                         <i data-feather="file-text"></i> Download Resume
@@ -56,12 +56,12 @@
 
         <section id="about" class="about">
             <div class="container">
-                <h2>About Me</h2>
+                <h2 class="fade-in">About Me</h2>
                 <div class="about-content">
-                    <div class="about-image">
+                    <div class="about-image slide-in-left">
                         <img src="https://via.placeholder.com/300" alt="Your Name" width="300" height="300">
                     </div>
-                    <div class="about-text">
+                    <div class="about-text slide-in-right">
                         <p>Hello! I'm a passionate web developer with experience in creating responsive and user-friendly websites. I specialize in front-end technologies like HTML, CSS, and JavaScript, and I'm always eager to learn new things.</p>
                         <p>When I'm not coding, you can find me exploring new coffee shops, reading sci-fi novels, or hiking in the great outdoors.</p>
                     </div>
@@ -70,94 +70,79 @@
         </section>
 
         <section id="experience" class="experience">
-
             <div class="container">
-                <h2>Experience</h2>
+                <h2 class="fade-in">Experience</h2>
                 <div class="timeline">
-                <div class="timeline-line">
-                    <!-- Timeline dates will be dynamically inserted here -->
-                </div>
-                <div class="timeline-entries">
-                    <div class="timeline-entry" data-start="2015-09-01" data-end="2019-05-31">
-                    <div class="timeline-content">
-                        <h3>Junior Web Developer</h3>
-                        <h4>StartUp Ventures</h4>
-                        <p class="entry-date">September 2015 - May 2017</p>
-                        <ul>
-                        <li>Assisted in the development of responsive websites for various clients</li>
-                        <li>Implemented front-end designs using HTML, CSS, and JavaScript</li>
-                        <li>Participated in code reviews and contributed to improving coding standards</li>
-                        </ul>
+                    <div class="timeline-line fade-in">
+                        <!-- Timeline dates will be dynamically inserted here -->
                     </div>
-                    </div>
-
-                    <div class="timeline-entry" data-start="2017-06-01" data-end="2019-12-31">
-                    <div class="timeline-content">
-                        <h3>Full Stack Developer</h3>
-                        <h4>Digital Solutions LLC</h4>
-                        <p class="entry-date">June 2017 - December 2019</p>
-                        <ul>
-                        <li>Designed and developed full-stack web applications using MERN stack</li>
-                        <li>Collaborated with UX/UI designers to implement intuitive user interfaces</li>
-                        <li>Optimized database queries, improving application performance by 40%</li>
-                        </ul>
-                    </div>
-                    </div>
-
-                    <div class="timeline-entry" data-start="2020-01-01" data-end="2024-12-31">
-                    <div class="timeline-content">
-                        <h3>Senior Web Developer</h3>
-                        <h4>Tech Innovators Inc.</h4>
-                        <p class="entry-date">January 2020 - Present</p>
-                        <ul>
-                        <li>Lead a team of 5 developers in creating responsive web applications</li>
-                        <li>Implemented agile methodologies, increasing project efficiency by 30%</li>
-                        <li>Developed and maintained multiple high-traffic websites using React and Node.js</li>
-                        </ul>
-                    </div>
-                    </div>
-
-                    <div class="timeline-entry" data-start="2021-01-01" data-end="2024-12-31">
-                        <div class="timeline-content">
-                            <h3>Senior Web Developer</h3>
-                            <h4>Tech Innovators Inc.</h4>
-                            <p class="entry-date">January 2020 - Present</p>
-                            <ul>
-                            <li>Lead a team of 5 developers in creating responsive web applications</li>
-                            <li>Implemented agile methodologies, increasing project efficiency by 30%</li>
-                            <li>Developed and maintained multiple high-traffic websites using React and Node.js</li>
-                            </ul>
-                        </div>
+                    <div class="timeline-entries">
+                        <div class="timeline-entry slide-in-left" data-start="2015-09-01" data-end="2019-05-31">
+                            <div class="timeline-content">
+                                <h3>Junior Web Developer</h3>
+                                <h4>StartUp Ventures</h4>
+                                <p class="entry-date">September 2015 - May 2017</p>
+                                <ul>
+                                    <li>Assisted in the development of responsive websites for various clients</li>
+                                    <li>Implemented front-end designs using HTML, CSS, and JavaScript</li>
+                                    <li>Participated in code reviews and contributed to improving coding standards</li>
+                                </ul>
+                            </div>
                         </div>
 
-                </div>
+                        <div class="timeline-entry slide-in-right" data-start="2017-06-01" data-end="2019-12-31">
+                            <div class="timeline-content">
+                                <h3>Full Stack Developer</h3>
+                                <h4>Digital Solutions LLC</h4>
+                                <p class="entry-date">June 2017 - December 2019</p>
+                                <ul>
+                                    <li>Designed and developed full-stack web applications using MERN stack</li>
+                                    <li>Collaborated with UX/UI designers to implement intuitive user interfaces</li>
+                                    <li>Optimized database queries, improving application performance by 40%</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-entry slide-in-left" data-start="2020-01-01" data-end="2024-12-31">
+                            <div class="timeline-content">
+                                <h3>Senior Web Developer</h3>
+                                <h4>Tech Innovators Inc.</h4>
+                                <p class="entry-date">January 2020 - Present</p>
+                                <ul>
+                                    <li>Lead a team of 5 developers in creating responsive web applications</li>
+                                    <li>Implemented agile methodologies, increasing project efficiency by 30%</li>
+                                    <li>Developed and maintained multiple high-traffic websites using React and Node.js</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="projects">
             <div class="container">
-                <h2>My Projects</h2>
+                <h2 class="fade-in">My Projects</h2>
                 <div class="project-grid">
-                    <div class="project-card">
+                    <div class="project-card scale-in">
                         <img src="https://via.placeholder.com/300x200" alt="E-commerce Website">
                         <h3>E-commerce Website</h3>
                         <p>A fully functional e-commerce website built with HTML, CSS, and JavaScript.</p>
                         <a href="#" class="btn">View Project</a>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card scale-in">
                         <img src="https://via.placeholder.com/300x200" alt="Weather App">
                         <h3>Weather App</h3>
                         <p>A weather application that provides real-time weather data using a third-party API.</p>
                         <a href="#" class="btn">View Project</a>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card scale-in">
                         <img src="https://via.placeholder.com/300x200" alt="Task Management System">
                         <h3>Task Management System</h3>
                         <p>A full-stack application for managing tasks and projects, built with vanilla JavaScript.</p>
                         <a href="#" class="btn">View Project</a>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card scale-in">
                         <img src="https://via.placeholder.com/300x200" alt="Portfolio Website">
                         <h3>Portfolio Website</h3>
                         <p>A responsive portfolio website showcasing my projects and skills.</p>
@@ -169,8 +154,8 @@
 
         <section id="contact" class="contact">
             <div class="container">
-                <h2>Contact Me</h2>
-                <form class="contact-form" id="contact-form" method="POST">
+                <h2 class="fade-in">Contact Me</h2>
+                <form class="contact-form fade-in" id="contact-form" method="POST">
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <textarea name="message" placeholder="Your Message" required></textarea>
