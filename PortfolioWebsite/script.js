@@ -1,3 +1,5 @@
+import { WEB3FORMS_ACCESS_KEY } from './config.js';
+
 document.addEventListener('DOMContentLoaded', function() {
   // Theme switching functionality
   const themeButtons = document.querySelectorAll('.theme-button');
@@ -47,23 +49,32 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Contact form submission
-  const contactForm = document.getElementById('contact-form');
-  contactForm.addEventListener('submit', function(e) {
+  const contactForm = document.querySelector('.contact-form');
+  contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+    const formData = new FormData(contactForm);
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY);
 
-    // Here you would typically send this data to a server
-    // For this example, we'll just log it to the console
-    console.log('Form submitted:', { name, email, message });
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
 
-    // Show a success message
-    alert('Thank you for your message! I\'ll get back to you soon.');
-
-    // Clear the form
-    contactForm.reset();
+      const result = await response.json();
+      if (response.status === 200) {
+        console.log('Form submitted successfully:', result);
+        alert('Thank you for your message! I\'ll get back to you soon.');
+        contactForm.reset();
+      } else {
+        console.error('Form submission failed:', result);
+        alert('Oops! Something went wrong. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Oops! Something went wrong. Please try again later.');
+    }
   });
 
   // Load Feather icons
