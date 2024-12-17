@@ -4,23 +4,44 @@ import { WEB3FORMS_ACCESS_KEY } from './config.js';
 document.addEventListener('DOMContentLoaded', function() {
   // Theme switching functionality
   const themeButtons = document.querySelectorAll('.theme-button');
+  
+  // Replace the existing setActiveTheme function with this updated version
   const setActiveTheme = (theme) => {
-    document.body.className = theme === 'light' ? '' : `${theme}-theme`;
-    themeButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.theme === theme);
-      btn.setAttribute('aria-pressed', btn.dataset.theme === theme);
-    });
-    // Re-run feather.replace() to update icons with new colors
-    feather.replace();
-    // Save the active theme to localStorage
-    localStorage.setItem('activeTheme', theme);
+    const body = document.body;
+    body.classList.add('theme-transition');
+    body.classList.add('theme-transition-fade');
+    
+    setTimeout(() => {
+      body.className = theme === 'light' ? '' : `${theme}-theme`;
+      body.classList.add('theme-transition');
+      themeButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === theme);
+        btn.setAttribute('aria-pressed', btn.dataset.theme === theme);
+      });
+      // Re-run feather.replace() to update icons with new colors
+      feather.replace();
+      // Save the active theme to localStorage
+      localStorage.setItem('activeTheme', theme);
+      
+      setTimeout(() => {
+        body.classList.remove('theme-transition-fade');
+        setTimeout(() => {
+          body.classList.remove('theme-transition');
+        }, 300);
+      }, 10);
+    }, 300);
   };
 
+  // Add this new function to handle theme button clicks
+  const handleThemeButtonClick = (event) => {
+    const theme = event.currentTarget.dataset.theme;
+    setActiveTheme(theme);
+  };
+
+  // Update the theme button event listeners
   themeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const theme = button.dataset.theme;
-      setActiveTheme(theme);
-    });
+    button.removeEventListener('click', handleThemeButtonClick);
+    button.addEventListener('click', handleThemeButtonClick);
   });
 
   // Set initial theme from localStorage or default to 'light'
@@ -97,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (endDate > latestDate) latestDate = endDate;
     });
     
-    // Add padding to the start and end dates (6 months before and after)
-    earliestDate = new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 6, 1);
-    latestDate = new Date(latestDate.getFullYear(), latestDate.getMonth() + 7, 0); // End of the month, 6 months after
+    // Add padding to the start and end dates (2 months before and after)
+    earliestDate = new Date(earliestDate.getFullYear(), earliestDate.getMonth() - 2, 1);
+    latestDate = new Date(latestDate.getFullYear(), latestDate.getMonth() + 2, 0); // End of the month, 2 months after
 
     const timelineDuration = latestDate.getTime() - earliestDate.getTime();
 
@@ -189,13 +210,31 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('load', positionTimelineEntries);
   positionTimelineEntries();
 
-  // Scroll-triggered animations
-  const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+  // Scroll-triggered animations with sequence
+  const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .slide-in-top, .slide-in-bottom, .scale-in');
+  
+  const animateElement = (element, delay) => {
+    setTimeout(() => {
+      element.classList.add('appear');
+    }, delay);
+  };
 
-  const animateOnScroll = (entries, observer) => {
+  const animateSequence = (entries, observer) => {
+    let delay = 0;
+    const delayIncrement = 200; // Adjust this value to change the delay between animations
+
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('appear');
+        if (entry.target.closest('.contact-form')) {
+          // For contact form inputs, animate them in sequence
+          const formGroups = entry.target.closest('.contact-form').querySelectorAll('.form-group');
+          formGroups.forEach((group, index) => {
+            animateElement(group, index * delayIncrement);
+          });
+        } else {
+          animateElement(entry.target, delay);
+          delay += delayIncrement;
+        }
         observer.unobserve(entry.target);
       }
     });
@@ -207,10 +246,16 @@ document.addEventListener('DOMContentLoaded', function() {
     threshold: 0.1
   };
 
-  const observer = new IntersectionObserver(animateOnScroll, options);
+  const observer = new IntersectionObserver(animateSequence, options);
 
   animatedElements.forEach(element => {
     observer.observe(element);
   });
+
+  // Observe the contact form separately
+  contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    observer.observe(contactForm);
+  }
 });
 

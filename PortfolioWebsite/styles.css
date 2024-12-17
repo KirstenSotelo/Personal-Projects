@@ -8,6 +8,10 @@
   --accent-color: #28a745;
 }
 
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .dark-theme {
   --bg-color: #333333;
   --bg-color-alt: #2b2b2b;
@@ -30,6 +34,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
@@ -141,12 +146,12 @@ nav ul li a:hover {
 
 .hero h1 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
   color: var(--primary-color);
 }
 
 .hero p {
   font-size: 1.2rem;
+  margin-top: 1rem;
   margin-bottom: 2rem;
   color: var(--text-color);
 }
@@ -317,7 +322,7 @@ nav ul li a:hover {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 2rem;
 }
 
@@ -372,6 +377,17 @@ nav ul li a:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.form-group {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.form-group.appear {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contact-form input,
@@ -588,6 +604,28 @@ footer .container {
   transform: translateX(0);
 }
 
+.slide-in-top {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in-top.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-in-bottom {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in-bottom.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .scale-in {
   opacity: 0;
   transform: scale(0.9);
@@ -597,5 +635,14 @@ footer .container {
 .scale-in.appear {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Add this new class for the fade effect */
+.theme-transition {
+  transition: opacity 0.3s ease;
+}
+
+.theme-transition-fade {
+  opacity: 0;
 }
 
