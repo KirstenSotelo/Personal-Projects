@@ -1,3 +1,4 @@
+// Contact form submission
 import { WEB3FORMS_ACCESS_KEY } from './config.js';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -48,12 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
     navList.classList.toggle('show');
   });
 
-  // Contact form submission
-  const contactForm = document.querySelector('.contact-form');
+  const contactForm = document.getElementById('contact-form');
   contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const formData = new FormData(contactForm);
+    const formData = new FormData(this);
     formData.append('access_key', WEB3FORMS_ACCESS_KEY);
 
     try {
@@ -64,15 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const result = await response.json();
       if (response.status === 200) {
-        console.log('Form submitted successfully:', result);
         alert('Thank you for your message! I\'ll get back to you soon.');
         contactForm.reset();
       } else {
-        console.error('Form submission failed:', result);
         alert('Oops! Something went wrong. Please try again later.');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error:', error);
       alert('Oops! Something went wrong. Please try again later.');
     }
   });
