@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         body.classList.remove('theme-transition-fade');
         setTimeout(() => {
           body.classList.remove('theme-transition');
-        }, 300);
+        }, 2000);
       }, 10);
     }, 300);
   };

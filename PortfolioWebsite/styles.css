@@ -10,6 +10,7 @@
 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Montserrat';
 }
 
 .dark-theme {
@@ -69,9 +70,9 @@ nav {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -86,6 +87,8 @@ nav ul li {
 
 nav ul li a {
   color: var(--text-color);
+  font-weight: bold;
+  font-size: 1.2rem;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -98,7 +101,7 @@ nav ul li a:hover {
   display: flex;
   gap: 1rem;
   margin-left: 1rem;
-  padding: 4px;
+  padding: 6px;
 }
 
 .theme-button {
@@ -112,7 +115,7 @@ nav ul li a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3 ease;
 }
 
 /* Add this media query for smaller screens */
@@ -135,12 +138,12 @@ nav ul li a:hover {
     padding: 0.25rem;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
   }
 }
 
 .theme-button:hover {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
+  color: var(--primary-color);
   border-color: var(--primary-color);
 }
 
@@ -150,9 +153,11 @@ nav ul li a:hover {
 }
 
 .theme-button.active {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
+  background-color: var(--background-color);
+  color: var(--primary-color);
   border-color: var(--primary-color);
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .theme-button svg {
@@ -168,12 +173,17 @@ nav ul li a:hover {
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  color: var(--text-color);
+}
+
+.hero h2 {
+  font-size: 2rem;
   color: var(--primary-color);
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
   color: var(--text-color);
@@ -187,7 +197,7 @@ nav ul li a:hover {
 }
 
 /* Button styles */
-.btn {
+.main-btn {
   display: inline-flex;
   align-items: center;
   background-color: var(--primary-color);
@@ -199,9 +209,21 @@ nav ul li a:hover {
   border: 2px solid var(--primary-color);
 }
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
 .btn:hover {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .btn-outline {
@@ -225,10 +247,18 @@ nav ul li a:hover {
 }
 
 .about h2 {
+  font-size: 2.6rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.about h4 {
+  font-size: 1.4rem;
   text-align: center;
   margin-bottom: 2rem;
   color: var(--primary-color);
 }
+
 
 .about-content {
   display: flex;
@@ -236,7 +266,14 @@ nav ul li a:hover {
   gap: 2rem;
 }
 
+.about-content p {
+  font-size: 1.3rem;
+}
+
 .about-image img {
+  border: 4px solid var(--text-color);
+  height: 400px;
+  width: auto;
   border-radius: 50%;
 }
 
@@ -247,6 +284,13 @@ nav ul li a:hover {
 }
 
 .experience h2 {
+  font-size: 2.6rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.experience h4 {
+  font-size: 1.4rem;
   text-align: center;
   margin-bottom: 2rem;
   color: var(--primary-color);
@@ -261,7 +305,7 @@ nav ul li a:hover {
 
 .timeline-line {
   position: relative;
-  height: 8px;
+  height: 6px;
   background-color: var(--secondary-color);
   margin-bottom: 40px;
   margin-top: 20px;
@@ -269,10 +313,11 @@ nav ul li a:hover {
 
 .timeline-date {
   position: absolute;
-  top: -25px;
+  top: -30px;
   transform: translateX(-50%);
-  font-size: 0.8rem;
-  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--secondary-color);
   width: 40px;
   text-align: center;
 }
@@ -282,7 +327,7 @@ nav ul li a:hover {
   position: absolute;
   bottom: -20px;
   left: 50%;
-  width: 2px;
+  width: 3px;
   height: 24px;
   background-color: var(--secondary-color);
   transform: translateX(-50%);
@@ -304,21 +349,29 @@ nav ul li a:hover {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 2px 4px var(--primary-color);
+  transition: all 0.4s ease;
 }
 
 .timeline-content h3 {
   margin-bottom: 0.5rem;
-  color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .timeline-content h4 {
-  color: var(--secondary-color);
+  text-align: left;
+  color: var(--primary-color);
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .timeline-content .entry-date {
   font-style: italic;
-  color: var(--text-color);
+  color: var(--secondary-color);
   margin-bottom: 1rem;
 }
 
@@ -327,6 +380,7 @@ nav ul li a:hover {
 }
 
 .timeline-content li {
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
   color: var(--text-color);
 }
@@ -338,6 +392,13 @@ nav ul li a:hover {
 }
 
 .projects h2 {
+  font-size: 2.6rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.projects h4 {
+  font-size: 1.4rem;
   text-align: center;
   margin-bottom: 2rem;
   color: var(--primary-color);
@@ -356,6 +417,12 @@ nav ul li a:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  transition: all 0.6s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 2px 4px var(--primary-color);
+  transition: all 0.6s ease;
 }
 
 .project-card img {
@@ -365,6 +432,8 @@ nav ul li a:hover {
 }
 
 .project-card h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
   padding: 1rem;
   margin: 0;
   color: var(--primary-color);
@@ -372,6 +441,7 @@ nav ul li a:hover {
 
 .project-card p {
   padding: 0 1rem;
+  font-size: 1.1rem;
   flex-grow: 1;
   color: var(--text-color);
 }
@@ -389,6 +459,13 @@ nav ul li a:hover {
 }
 
 .contact h2 {
+  font-size: 2.6rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.contact h4 {
+  font-size: 1.4rem;
   text-align: center;
   margin-bottom: 2rem;
   color: var(--primary-color);
@@ -417,12 +494,12 @@ nav ul li a:hover {
 .contact-form textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--secondary-color);
+  border: 3px solid var(--secondary-color);
   border-radius: 4px;
   background-color: var(--bg-color-alt);
   color: var(--text-color);
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+  font-size: 1.3rem;
+  transition: border-color 0.4s ease;
 }
 
 .contact-form input:focus,
@@ -432,23 +509,16 @@ nav ul li a:hover {
 }
 
 .contact-form textarea {
-  height: 150px;
+  height: 200px;
   resize: vertical;
 }
 
 .contact-form button {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1.3rem;
 }
 
 .contact-form button:hover {
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
 }
 
 /* Footer styles */

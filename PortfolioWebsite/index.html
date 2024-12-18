@@ -6,11 +6,12 @@
     <title>Kirsten Sotelo - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/feather-icons"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
     <header id="top">
         <nav class="container">
-            <a href="#top" class="logo">Kirsten Sotelo</a>
+            <a href="#top" class="logo"><i data-feather="user"></i> Kirsten Sotelo</a>
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -38,7 +39,9 @@
                 <h2 class="fade-in">Computer Science Student</h2>
                 <p class="fade-in">I'm an aspiring software engineer working toward becoming a full-stack software developer.</p>
                 <div class="hero-buttons fade-in">
-                    <a href="#projects" class="btn">View My Work</a>
+                    <a href="#projects" class="main-btn">
+                        <i data-feather="airplay"></i>&nbsp;View My Work
+                    </a>
                     <a href="public_img/Kirsten Sotelo - Resume.pdf" target="_blank" class="btn btn-outline" a>
                         <i data-feather="file-text"></i> View Resume
                     </a>
@@ -55,9 +58,12 @@
         <section id="about" class="about">
             <div class="container">
                 <h2 class="fade-in">About Me</h2>
+                <h4 class="fade-in">General Info</h4>
                 <div class="about-content">
                     <div class="about-image slide-in-left">
-                        <img src="public_img/aboutme.jpg" alt="Image of Me" width="300" height="300">
+                        <a href="https://www.linkedin.com/in/kirstensotelo/" target="_blank" rel="noopener noreferrer">
+                            <img src="public_img/KirstenSotelo.jpg" href="public_img/Kirsten Sotelo - Resume.pdf" target="_blank"  alt="Image of Me">
+                        </a>
                     </div>
                     <div class="about-text slide-in-right">
                         <p>I'm a Computer Science Student with an interest in software development and cybersecurity. My goal is to pursue a career in full-stack development to build impactful, scalable software.</p>
@@ -70,6 +76,7 @@
         <section id="experience" class="experience">
             <div class="container">
                 <h2 class="fade-in">Experience</h2>
+                <h4 class="fade-in">Career Progress</h4>
                 <div class="timeline">
                     <div class="timeline-line fade-in">
                         <!-- Timeline dates will be dynamically inserted here -->
@@ -107,20 +114,21 @@
         <section id="projects" class="projects">
             <div class="container">
                 <h2 class="fade-in">My Projects</h2>
+                <h4 class="fade-in">Personal, school, and work projects</h4>
                 <div class="project-grid">
                     <div class="project-card slide-in-left">
                         <img src="public_img/project1.jpg" alt="Creation Projects">
                         <h3>Revision Compare Tool, OMRON Verification Tool, and Data Reader Tool</h3>
                         <p>Developed various programs to improve engineering efficiency and streamline workflows at Creation Technologies, Markham, ON.</p>
                         <p><br><strong>Skills Used:</strong> Python, Pandas, Reportlab.</p>
-                        <a href="https://github.com/KirstenSotelo/PlaceholderNameProjects" target="_blank" class="btn">View Project</a>
+                        <a href="https://github.com/KirstenSotelo/PlaceholderNameProjects" target="_blank" class="btn btn-outline">View Project</a>
                     </div>
                     <div class="project-card slide-in-left">
                         <img src="public_img/project2.png" alt="Spotistics">
                         <h3>Spotify Top Tracks and Artists Website</h3>
                         <p>Developed a Flask-based web application that utilized Spotify's web API for developers.</p>
                         <p><br><strong>Skills Used:</strong> Python, Flask, JavaScript, HTML, CSS,</p>
-                        <a href="https://github.com/KirstenSotelo/RandomProjects/tree/main/SpotifyAPI" target="_blank" class="btn">View Project</a>
+                        <a href="https://github.com/KirstenSotelo/RandomProjects/tree/main/SpotifyAPI" target="_blank" class="btn btn-outline">View Project</a>
                     </div>
 
                     <div class="project-card slide-in-left">
@@ -128,7 +136,7 @@
                         <h3>Online Retail Banking System</h3>
                         <p>Developed and designed along with peers, an online retail banking system with a database using SQL, and a functional UI and GUI utilizing Bash and JavaFX.</p>
                         <p><br><strong>Skills Used:</strong> SQL, Bash, JavaFX.</p>
-                        <a href="https://github.com/KirstenSotelo/" target="_blank" class="btn">View Project</a>
+                        <a href="https://github.com/KirstenSotelo/" target="_blank" class="btn btn-outline">View Project</a>
                     </div>
 
                     <div class="project-card slide-in-left">
@@ -136,7 +144,7 @@
                         <h3>Portfolio Website</h3>
                         <p>A responsive portfolio website showcasing myself, my projects, and my skills.</p>
                         <p><br><strong>Skills Used:</strong> JavaScript, HTML, CSS.</p>
-                        <a href="https://www.cs.torontomu.ca/~ksotelo/" class="btn">View Project</a>
+                        <a href="https://www.cs.torontomu.ca/~ksotelo/" class="btn btn-outline">View Project</a>
                     </div>
 
                 </div>
@@ -146,6 +154,7 @@
         <section id="contact" class="contact">
             <div class="container">
                 <h2 class="fade-in">Contact Me</h2>
+                <h4 class="fade-in">Let's Work Together!</h4>
                 <form class="contact-form" id="contact-form" method="POST">
                     <div class="form-group slide-in-top">
                         <input type="text" name="name" placeholder="Your Name" required>
@@ -157,7 +166,7 @@
                         <textarea name="message" placeholder="Your Message" required></textarea>
                     </div>
                     <div class="form-group slide-in-top">
-                        <button type="submit">Submit Form</button>
+                        <button type="submit" class="btn btn-outline">Submit Form</button>
                     </div>
                 </form>
             </div>
