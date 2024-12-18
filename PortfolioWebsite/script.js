@@ -59,6 +59,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // Smooth scrolling for logo
+  const logo = document.querySelector('.logo');
+  if (logo) {
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
   // Mobile menu toggle
   const menuButton = document.createElement('button');
   menuButton.textContent = 'Menu';

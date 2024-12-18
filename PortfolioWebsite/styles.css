@@ -115,6 +115,29 @@ nav ul li a:hover {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Add this media query for smaller screens */
+@media (max-width: 768px) {
+  .theme-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .theme-button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .theme-buttons {
+    position: absolute;
+    top: 100%;
+    right: 10px;
+    background-color: var(--bg-color);
+    padding: 0.25rem;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
 .theme-button:hover {
   background-color: var(--primary-color);
   color: var(--bg-color);
@@ -337,8 +360,8 @@ nav ul li a:hover {
 
 .project-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 300px;
+  object-fit: fill;
 }
 
 .project-card h3 {
@@ -521,9 +544,9 @@ footer .container {
   .theme-buttons {
     position: absolute;
     top: 100%;
-    right: 20px;
+    right: 10px;
     background-color: var(--bg-color);
-    padding: 0.5rem;
+    padding: 0.25rem;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
