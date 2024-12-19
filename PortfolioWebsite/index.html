@@ -11,7 +11,15 @@
 <body>
     <header id="top">
         <nav class="container">
-            <a href="#top" class="logo"><i data-feather="user"></i> Kirsten Sotelo</a>
+            <a href="#top" class="logo">
+                <span class="logo-icon" aria-hidden="true">
+                    <i data-feather="user"></i>
+                </span>
+                <span class="logo-text">Kirsten Sotelo</span>
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i data-feather="menu"></i>
+            </button>
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -35,13 +43,10 @@
     <main>
         <section id="hero" class="hero">
             <div class="container">
-                <h1 class="fade-in">Hello, I'm Kirsten Sotelo</h1>
+                <h1 class="fade-in">Hi, I'm Kirsten Sotelo</h1>
                 <h2 class="fade-in">Computer Science Student</h2>
                 <p class="fade-in">I'm an aspiring software engineer working toward becoming a full-stack software developer.</p>
                 <div class="hero-buttons fade-in">
-                    <a href="#projects" class="main-btn">
-                        <i data-feather="airplay"></i>&nbsp;View My Work
-                    </a>
                     <a href="public_img/Kirsten Sotelo - Resume.pdf" target="_blank" class="btn btn-outline" a>
                         <i data-feather="file-text"></i> View Resume
                     </a>
@@ -116,14 +121,14 @@
                 <h2 class="fade-in">My Projects</h2>
                 <h4 class="fade-in">Personal, school, and work projects</h4>
                 <div class="project-grid">
-                    <div class="project-card slide-in-left">
+                    <div class="project-card dark-bg slide-in-left">
                         <img src="public_img/project1.jpg" alt="Creation Projects">
                         <h3>Revision Compare Tool, OMRON Verification Tool, and Data Reader Tool</h3>
                         <p>Developed various programs to improve engineering efficiency and streamline workflows at Creation Technologies, Markham, ON.</p>
                         <p><br><strong>Skills Used:</strong> Python, Pandas, Reportlab.</p>
                         <a href="https://github.com/KirstenSotelo/PlaceholderNameProjects" target="_blank" class="btn btn-outline">View Project</a>
                     </div>
-                    <div class="project-card slide-in-left">
+                    <div class="project-card pink-bg slide-in-left">
                         <img src="public_img/project2.png" alt="Spotistics">
                         <h3>Spotify Top Tracks and Artists Website</h3>
                         <p>Developed a Flask-based web application that utilized Spotify's web API for developers.</p>
@@ -131,7 +136,7 @@
                         <a href="https://github.com/KirstenSotelo/RandomProjects/tree/main/SpotifyAPI" target="_blank" class="btn btn-outline">View Project</a>
                     </div>
 
-                    <div class="project-card slide-in-left">
+                    <div class="project-card navy-bg slide-in-left">
                         <img src="public_img/project3.jpg" alt="Online Retail Banking System">
                         <h3>Online Retail Banking System</h3>
                         <p>Developed and designed along with peers, an online retail banking system with a database using SQL, and a functional UI and GUI utilizing Bash and JavaFX.</p>
@@ -139,8 +144,8 @@
                         <a href="https://github.com/KirstenSotelo/" target="_blank" class="btn btn-outline">View Project</a>
                     </div>
 
-                    <div class="project-card slide-in-left">
-                        <img src="https://via.placeholder.com/500x300" alt="Portfolio Website">
+                    <div class="project-card grey-bg slide-in-left">
+                        <img src="public_img/project4.png" alt="Portfolio Website">
                         <h3>Portfolio Website</h3>
                         <p>A responsive portfolio website showcasing myself, my projects, and my skills.</p>
                         <p><br><strong>Skills Used:</strong> JavaScript, HTML, CSS.</p>

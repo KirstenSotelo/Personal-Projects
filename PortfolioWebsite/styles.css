@@ -1,10 +1,17 @@
 /* Reset and base styles */
 :root {
-  --bg-color: #ffffff;
-  --bg-color-alt: #f8f9fa;
-  --text-color: #333333;
+  --bg-color: #F7F7F7;
+  --hd-color: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 1) 100%);
+  --hd-text-color: #000000;
+  --bg-color-alt: #FDFDFD;
+  --text-color: #000000;
+  --op-text-color: #FFFFFF;
+  --menu-text-color: #000000;
   --primary-color: #007bff;
-  --secondary-color: #6c757d;
+  --secondary-color: #1d3b66;
+  --btn-color: #1d3b66;
+  --btn-bg-color: transparent;
+  --btn-outline-color: #1d3b66;
   --accent-color: #28a745;
 }
 
@@ -14,20 +21,34 @@ body {
 }
 
 .dark-theme {
-  --bg-color: #333333;
-  --bg-color-alt: #2b2b2b;
-  --text-color: #ffffff;
-  --primary-color: #4da6ff;
-  --secondary-color: #adb5bd;
+  --bg-color: #282828;
+  --hd-color: linear-gradient(0deg, rgba(22,22,22,0) 0%, rgba(25,25,25,0.7) 0%, rgba(17,17,17,1) 100%);
+  --hd-text-color: #FFFFFF;
+  --bg-color-alt: #222222;
+  --text-color: #FFFFFF;
+  --menu-text-color: #FFFFFF;
+  --op-text-color: #000000;
+  --primary-color: #05f7ff;
+  --secondary-color: #b8f4fb;
+  --btn-color: #b8f4fb;
+  --btn-bg-color: transparent;
+  --btn-outline-color: #b8f4fb;
   --accent-color: #5cb85c;
 }
 
 .blue-theme {
-  --bg-color: #e6f2ff;
-  --bg-color-alt: #d9e9ff;
-  --text-color: #00366d;
-  --primary-color: #0056b3;
-  --secondary-color: #4d94ff;
+  --bg-color: #F7F7F7;
+  --hd-color: linear-gradient(0deg, rgba(0,53,149,1) 0%, rgba(0,53,149,0.8) 0%, rgba(0,53,149,1) 100%);
+  --hd-text-color: #ffffff;
+  --bg-color-alt: #FDFDFD;
+  --text-color: #000000;
+  --op-text-color: #ffffff;
+  --menu-text-color: #FFFFFF;
+  --primary-color: #ffb91d;
+  --secondary-color: #003595;
+  --btn-color: #004c9b;
+  --btn-bg-color: #e5e5e5;
+  --btn-outline-color: #e5e5e5;
   --accent-color: #00a86b;
 }
 
@@ -35,7 +56,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
@@ -54,7 +74,7 @@ body {
 
 /* Header styles */
 header {
-  background-color: var(--bg-color);
+  background: var(--hd-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
@@ -67,30 +87,51 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
+  position: relative;
 }
 
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--hd-text-color);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
+
+.logo-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logo-text {
+  display: inline;
 }
 
 nav ul {
   display: flex;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 nav ul li {
-  margin-left: 1.5rem;
+  margin: 0 1rem;
 }
 
 nav ul li a {
-  color: var(--text-color);
+  color: var(--hd-text-color);
   font-weight: bold;
   font-size: 1.2rem;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 nav ul li a:hover {
@@ -100,26 +141,116 @@ nav ul li a:hover {
 .theme-buttons {
   display: flex;
   gap: 1rem;
-  margin-left: 1rem;
-  padding: 6px;
 }
 
 .theme-button {
+  margin: 10px 0;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  border: 2px solid var(--secondary-color);
+  background: var(--hd-color);
+  color: var(--hd-text-color);
+  border: 2px solid var(--hd-text-color);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3 ease;
+  transition: all 0.3s ease;
 }
 
-/* Add this media query for smaller screens */
+.theme-button:hover {
+  transform: scale(1.05);
+}
+
+.theme-button:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.theme-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.theme-button.active {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.theme-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--menu-text-color);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 @media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+
+  .logo {
+    font-size: 1rem;
+    order: 1;
+    flex: 1;
+  }
+
+  .logo-text {
+    font-size: 0.8rem;
+  }
+
+  .logo-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 2;
+  }
+
+  .theme-buttons {
+    order: 3;
+  }
+
+  nav ul {
+    flex-basis: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    order: 4;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+  }
+
+  nav ul.show {
+    display: flex;
+    max-height: 300px; /* Adjust this value based on your menu's height */
+    opacity: 1;
+  }
+
+  nav ul li {
+    margin: 0.5rem 0;
+  }
+
   .theme-button {
     width: 30px;
     height: 30px;
@@ -129,18 +260,14 @@ nav ul li a:hover {
     width: 16px;
     height: 16px;
   }
-
-  .theme-buttons {
-    position: absolute;
-    top: 100%;
-    right: 10px;
-    background-color: var(--bg-color);
-    padding: 0.25rem;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.1s ease;
-  }
 }
+
+/* Rest of the CSS remains unchanged */
+
+
+
+
+
 
 .theme-button:hover {
   color: var(--primary-color);
@@ -197,43 +324,35 @@ nav ul li a:hover {
 }
 
 /* Button styles */
-.main-btn {
-  display: inline-flex;
-  align-items: center;
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  border: 2px solid var(--primary-color);
-}
-
 .btn {
+  font-weight: bold;
+  text-align: center;
   display: inline-flex;
   align-items: center;
-  background-color: var(--bg-color);
+  background-color: var(--button-bg-color);
   color: var(--primary-color);
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  border: 2px solid var(--primary-color);
+  transition: background-color 0.6s ease, color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+  border: 2px solid var(--btn-outline-color);
+  z-index: 999;
 }
 
 .btn:hover {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--btn-color);
+  border-color: var(--btn-color);
+  transform: scale(1.03);
 }
 
 .btn-outline {
-  background-color: transparent;
-  color: var(--primary-color);
+  background-color: var(--btn-bg-color);
+  color: var(--btn-color);
 }
 
 .btn-outline:hover {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
+  background-color: var(--btn-color);
+  color: var(--op-text-color);
 }
 
 .btn svg {
@@ -267,7 +386,7 @@ nav ul li a:hover {
 }
 
 .about-content p {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .about-image img {
@@ -275,6 +394,12 @@ nav ul li a:hover {
   height: 400px;
   width: auto;
   border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.015);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Experience section styles */
@@ -349,12 +474,13 @@ nav ul li a:hover {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
+  transform: scale(1);
 }
 
 .timeline-content:hover {
-  box-shadow: 0 2px 4px var(--primary-color);
-  transition: all 0.4s ease;
+  transform: scale(1.02) translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .timeline-content h3 {
@@ -408,21 +534,76 @@ nav ul li a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 2rem;
+  transition: all 0.6s ease;
 }
 
 .project-card {
-  background-color: var(--bg-color);
+  position: relative;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  transition: all 0.6s ease;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
 }
 
 .project-card:hover {
-  box-shadow: 0 2px 4px var(--primary-color);
-  transition: all 0.6s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.project-card:hover::after {
+  opacity: 1;
+  z-index: 1;
+}
+
+.dark-bg {
+  background: #1A1A1A;
+  color: #fff;
+}
+
+.dark-bg h3 {
+  color: #FFF;
+}
+
+.pink-bg {
+  background: #6f2e40;
+  color: #fff
+}
+
+.pink-bg h3 {
+  color: #FFF;
+}
+
+.navy-bg{
+  background: #264156;
+  color: #fff;
+}
+
+.navy-bg h3 {
+  color: #fff;
+}
+
+.grey-bg{
+  background: #333333;
+  color: #fff;
+}
+
+.grey-bg h3 {
+  color: #fff;
 }
 
 .project-card img {
@@ -432,24 +613,60 @@ nav ul li a:hover {
 }
 
 .project-card h3 {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: bold;
   padding: 1rem;
   margin: 0;
-  color: var(--primary-color);
 }
 
 .project-card p {
   padding: 0 1rem;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   flex-grow: 1;
-  color: var(--text-color);
 }
 
 .project-card .btn {
-  display: block;
+  display: inline-block;
   text-align: center;
   margin: 1rem;
+  width: calc(100% - 2rem);
+  box-sizing: border-box;
+  background-color: var(--btn-color);
+  border-color: var(--btn-color);
+  color: var(--op-text-color);
+}
+
+@media (max-width: 480px) {
+  .project-card .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    padding: 1rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    max-width: 100%;
+  }
 }
 
 /* Contact section styles */
@@ -499,13 +716,20 @@ nav ul li a:hover {
   background-color: var(--bg-color-alt);
   color: var(--text-color);
   font-size: 1.3rem;
-  transition: border-color 0.4s ease;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .contact-form textarea {
@@ -518,7 +742,7 @@ nav ul li a:hover {
 }
 
 .contact-form button:hover {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
 }
 
 /* Footer styles */
@@ -526,6 +750,7 @@ footer {
   background-color: var(--bg-color-alt);
   color: var(--text-color);
   padding: 1rem 0;
+  font-size: 1.4rem;
 }
 
 footer .container {
@@ -545,8 +770,8 @@ footer .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-color: var(--bg-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -577,6 +802,11 @@ footer .container {
     text-align: center;
   }
 
+  .about-image img {
+    width: 300px;
+    height: auto;
+  }
+
   .project-grid {
     grid-template-columns: 1fr;
   }
@@ -584,6 +814,14 @@ footer .container {
   .hero-buttons {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero h2 {
+    font-size: 1.5rem;
   }
 
   .btn {
@@ -612,13 +850,14 @@ footer .container {
   }
 
   .theme-buttons {
-    position: absolute;
-    top: 100%;
-    right: 10px;
-    background-color: var(--bg-color);
-    padding: 0.25rem;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: static; /*This line is added to override the previous conflicting rule*/
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  footer p {
+    font-size: 1rem;
   }
 }
 
@@ -629,12 +868,17 @@ footer .container {
   border: none;
   font-size: 1rem;
   cursor: pointer;
-  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
+  
   .menu-toggle {
     display: block;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--menu-text-color);
   }
 
   nav ul {
@@ -644,12 +888,18 @@ footer .container {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: var(--bg-color);
+    background: var(--hd-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
   }
 
   nav ul.show {
     display: flex;
+    max-height: 300px; /* Adjust this value based on your menu's height */
+    opacity: 1;
   }
 
   nav ul li {
@@ -732,7 +982,7 @@ footer .container {
 
 /* Add this new class for the fade effect */
 .theme-transition {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.6s ease;
 }
 
 .theme-transition-fade {
