@@ -260,36 +260,100 @@ nav ul li a:hover {
     width: 16px;
     height: 16px;
   }
+  .container {
+    padding: 0 15px;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  h4 {
+    font-size: 1.2rem !important;
+  }
+
+  .about-content {
+    flex-direction: column;
+  }
+
+  .about-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .timeline-content {
+    padding: 15px;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-content h4 {
+    font-size: 1rem;
+  }
+
+  .timeline-content p, .timeline-content li {
+    font-size: 0.9rem;
+  }
 }
 
 /* Rest of the CSS remains unchanged */
 
-
-
-
-
-
-.theme-button:hover {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+.skill-card {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease, transform 0.2s ease;
 }
 
-.theme-button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+@media (max-width: 768px) {
+  .skill-card {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
 }
 
-.theme-button.active {
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  border-color: var(--primary-color);
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+.skill-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
 }
 
-.theme-button svg {
-  width: 20px;
-  height: 20px;
+.skill-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  animation: popEffect 0.3s ease forwards;
+}
+
+.skill-card:hover::after {
+  opacity: 1;
+  z-index: 1;
+}
+
+
+@keyframes popEffect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1.01);
+  }
 }
 
 /* Hero section styles */
@@ -511,10 +575,50 @@ nav ul li a:hover {
   color: var(--text-color);
 }
 
+/* Skills section styles */
+.skills {
+  padding: 4rem 0;
+  background-color: var(--bg-color-alt);
+}
+
+.skills h2 {
+  font-size: 2.6rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.skills h4 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(120px, 1fr));
+  padding-bottom: 50px;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+}
+
+
 /* Projects section styles */
 .projects {
   padding: 4rem 0;
-  background-color: var(--bg-color-alt);
+  background-color: var(--bg-color);
 }
 
 .projects h2 {
@@ -672,7 +776,7 @@ nav ul li a:hover {
 /* Contact section styles */
 .contact {
   padding: 4rem 0;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-alt);
 }
 
 .contact h2 {
@@ -747,7 +851,7 @@ nav ul li a:hover {
 
 /* Footer styles */
 footer {
-  background-color: var(--bg-color-alt);
+  background-color: var(--bg-color);
   color: var(--text-color);
   padding: 1rem 0;
   font-size: 1.4rem;
@@ -982,7 +1086,7 @@ footer .container {
 
 /* Add this new class for the fade effect */
 .theme-transition {
-  transition: opacity 0.6s ease;
+  transition: opacity 0.9s ease;
 }
 
 .theme-transition-fade {
