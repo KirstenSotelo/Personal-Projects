@@ -587,6 +587,12 @@ nav ul li a:hover {
   color: var(--text-color);
 }
 
+.skills h3 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
 .skills h4 {
   font-size: 1.4rem;
   text-align: center;
@@ -602,15 +608,31 @@ nav ul li a:hover {
   justify-content: center;
 }
 
+.skills-grid-concepts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  padding-bottom: 50px;
+  gap: 1rem;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .skills-grid {
     grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+
+  .skills-grid-concepts {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
 }
 
 @media (max-width: 480px) {
   .skills-grid {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+
+  .skills-grid-concepts {
+    grid-template-columns: repeat(1, minmax(100px, 1fr));
   }
 }
 
