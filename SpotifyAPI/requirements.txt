@@ -1,0 +1,4 @@
+Flask==3.0.2
+spotipy==2.23.0
+spotipy==1.32.2
+pandas==2.0.3
