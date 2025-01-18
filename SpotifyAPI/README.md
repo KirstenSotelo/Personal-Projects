@@ -20,7 +20,7 @@ The application provides an interactive and visually appealing interface to expl
 ## Demo  
 
 ### Pre-login page
-![image](https://github.com/user-attachments/assets/a50b7cbc-becf-45a2-b7ab-1984f10a21da)
+![image](https://github.com/user-attachments/assets/8904db65-1219-4b58-9906-d3b406138ca9)
 *Above: Example visualization of index.html*
 
 ![image](https://github.com/user-attachments/assets/98cad4fb-c666-4274-bff6-423f047fd67a)
