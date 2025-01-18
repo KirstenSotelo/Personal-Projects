@@ -1,0 +1,434 @@
+:root {
+    --main-color: #2c2c2c;
+    --black: #000;
+    --bg: #222222;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: 0.2s linear;
+    text-transform: none;
+}
+
+body {
+    background: linear-gradient(135deg, #060606 0%, #3A3A3A 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "Montserrat", sans-serif;
+    flex-direction: column;
+}
+
+.homepageTopbar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    z-index: 99;
+    background: linear-gradient(0deg, rgba(34,34,34,0) 0%, rgba(25,25,25,0.691841702501313) 0%, rgba(17,17,17,1) 100%);
+}
+
+.homepageTopbar .logo {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.homepageTopbar .logo button {
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.homepageTopbar .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.homepageTopbar .navbar button {
+    height: 100%;
+    background-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #fff;
+}
+
+.homepageLoginBtn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.homepageLoginBtn ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepageLoginBtn ul li {
+    list-style: none;
+}
+
+.homepageLoginBtn ul li a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #1DB954;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: all ease 0.3s;
+}
+
+.main-container {
+    background-image: url('../img/aboutBackground.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.main-container .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.main-container .home .text {
+    padding: 0px 20px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.main-container .home .text h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.main-container .home .text p {
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+.main-container .imageContainer {
+    max-width: 60%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.main-container .imageContainer img {
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.main-container .about {
+    padding-top: 100px;
+    background-image: url('../img/homeBackground.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-container .about .message {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.main-container .about .message h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.main-container .about .message p {
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+.main-container .about .exampleImages {
+    width: 100%;
+    max-width: 800px;
+}
+
+.main-container .about .exampleImages img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.main-container .contact {
+    width: 100%;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: #1c1c1c;
+}
+
+.main-container .contact .usage {
+    text-align: left;
+    height: 100%;
+    justify-content: center;
+}
+
+.main-container .contact .usage ul {
+    list-style: none;
+    height: 100%;
+}
+
+.main-container .contact .usage ul li {
+    padding-bottom: 10px;
+}
+
+.main-container .contact .usage ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.main-container .contact .contact-icons {
+    background-color: transparent;
+}
+
+.main-container .contact .contact-icons ul {
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    list-style: none;
+}
+
+.main-container .contact .contact-icons ul li a {
+    color: white;
+    font-size: 50px;
+    margin: 0 15px;
+}
+
+.terms-of-use {
+    background-image: url('../img/aboutBackground.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.privacy-policy {
+    background-image: url('../img/homeBackground.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.terms-of-use, .privacy-policy {
+    min-height: 100vh;
+    padding: 80px 40px 40px;
+    color: #fff;
+}
+
+.terms-of-use .terms-text, .privacy-policy .privacy-text {
+    width: 100%;
+    text-align: left;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
+.privacy-policy .privacy-text h1, .terms-of-use .terms-text h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.privacy-policy .privacy-text h3, .terms-of-use .terms-text h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.privacy-policy .privacy-text p, .terms-of-use .terms-text p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .homepageTopbar {
+        display: flex;
+        align-items: center;
+        height: 8vh;
+    }
+
+    .homepageTopbar .logo {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .homepageTopbar .navbar {
+        height: 100%;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .homepageTopbar .navbar button {
+        height: 100%;
+    }
+
+    .homepageLoginBtn {
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .main-container .home {
+        padding-top: 120px;
+    }
+
+    .main-container .imageContainer img {
+        width: 100%;
+    }
+
+    .main-container .imageContainer {
+        grid-template-columns: repeat(4, 1fr);
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 620px) {
+    .homepageTopbar {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        padding: 10px 0;
+        height: 18%;
+    }
+
+    .homepageTopbar .logo {
+        margin-bottom: 10px;
+        order: 1;
+    }
+    .homepageTopbar .navbar {
+        width: 100%;
+        height: calc(100%+10px);
+        grid-column-end: span 2;
+        width: 100%;
+        order: 3;
+    }
+
+    .homepageTopbar .navbar button {
+        font-size: 14px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .homepageTopbar .homepageLoginBtn {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        order: 2;
+    }
+
+    .homepageTopbar .homepageLoginBtn ul {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .homepageLoginBtn ul li a {
+        font-size: 14px;
+    }
+
+    .main-container .home .text h1,
+    .main-container .about .message h1 {
+        font-size: 28px;
+    }
+
+    .main-container .home .text p,
+    .main-container .about .message p {
+        font-size: 16px;
+    }
+
+    .main-container .imageContainer {
+        grid-template-columns: repeat(2, 1fr);
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .main-container .imageContainer img {
+        width: 100%;
+    }
+
+    .main-container .contact {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .main-container .contact .usage {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .main-container .contact .contact-icons {
+        height: calc(100% + 20px);
+        width: 100%;
+    }
+
+    .main-container .contact .contact-icons ul {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .main-container .contact .contact-icons ul li a {
+        font-size: 40px;
+        margin: 0 10px;
+    }
+
+    .main-container .home {
+        padding-top: 175px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .main-container .about {
+        padding-top: 175px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .terms-of-use, .privacy-policy {
+        padding-top: 180    px;
+    }
+}

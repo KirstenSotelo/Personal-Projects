@@ -1,0 +1,800 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/homepageBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #111111;
+}
+
+.sidebar .logo{
+    position: relative;
+    width: 100%;
+    padding: 2px;
+    text-align: center;
+    background-color: #111111;
+}
+
+.sidebar .logo::after {
+    content: "";
+    position: relative;
+    transform: translateY(-20px);
+    text-align: center;
+    display: block;
+    height: 2px;
+    width: 45%;
+    background: #ffffff;
+    margin: 0 auto;
+    border-radius: 50px;
+}
+
+.sidebar .logo button {
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+    margin-top: 5%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 3rem;
+    height:5rem;
+    font-weight: bold;
+}
+
+/* UNORDERED LIST */
+.sidebar .navigation ul {
+    list-style: none;
+    padding-top: 1rem;
+    margin: 0;
+    width: 100%;
+}
+
+ /* LIST ITEM */
+.sidebar .navigation ul li {
+    padding-top: 15px;
+    margin-left: 3%;
+    text-transform: none;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* ICONS - Used to space the icons and the text*/
+.sidebar .navigation .sidebarButton {
+    min-width: 110%;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: start;
+    transform: translateX(-30px);
+    color: #888888;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+/* HOVERING OVER SIDEBAR BUTTONS */
+.sidebar .navigation .sidebarButton:focus {
+    outline: none; /* Remove default outline */
+    background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+/* Active State */
+.sidebar .navigation .sidebarButton.active {
+    background: linear-gradient(90deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+    color: #ffffff;
+    transform: translateX(-12px);
+    transition: all 0.5s ease;
+}
+
+/* Hover State */
+.sidebar .navigation .sidebarButton:hover {
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+
+/* POLICIES - COOKIES, PRIVACY*/
+.sidebar .policies {
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+}
+
+.sidebar .policies ul {
+    list-style: none;
+}
+
+.sidebar .policies ul li {
+    padding-bottom: 5px;
+}
+
+.sidebar .policies ul li a{
+    color: #b3b3b3;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sidebar .policies ul li a:hover,
+.sidebar .policies ul li a:active,
+.sidebar .policies ul li a:focus {
+    text-decoration: underline;
+    color: #f1f1f1;
+}
+
+/* MAIN CONTAINER */
+.main-container {
+    object-fit: cover;
+    width: 100%;
+    margin-bottom: 100px;
+    justify-content: center; /* Center horizontally */
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* DO NOT ADD WIDTH */
+.containerContents {
+    flex-wrap: wrap;
+    margin-left: 200px;
+}
+
+/* TOP BAR */
+.topbar {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 120px;
+    min-height: 25%;
+    max-height: 40%;
+}
+
+.topbar .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 200px
+}
+
+.topbar .navbar ul {
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    justify-content: center;
+}
+
+.topbar .navbar ul li {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100%;
+}
+
+.topbar .navbar ul li .navbarButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Make the button fill the li height */
+    width: 100%;
+    line-height: 1.2; /* Adjust for vertical centering */
+    border-radius: 0;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 14px;
+    color: #888888;
+    transform: translateY(-8px);
+    transition: all 0.4s;
+}
+
+/* HOVERING OVER TOPBAR BUTTONS - 4 WEEKS, 6 MONTHS, ALL-TIME */
+.topbar .navbar ul li .navbarButton:hover, 
+.topbar .navbar ul li .navbarButton:focus {
+    color: #f1f1f1;
+}
+
+.topbar .navbar ul li .navbarButton.active {
+    height: 100%; /* Keep the height consistent when active */
+    background: linear-gradient(180deg, rgb(70, 35, 120) 0%, rgba(255, 255, 255, 0) 50%);
+    width: 100%;
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 16px;
+    /* background-color: #1f1f1f; */
+    transform: translateY(0px);
+  }
+
+.trackIcons {
+    padding-bottom: 20px;
+    height: auto;
+    max-height: 40%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Icons */
+.spotify-icons {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+/* TRACK ICONS */
+.trackIcons .spotify-icons .list {
+    display: grid;
+    grid-template-columns: repeat(8, 2fr);
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100%;
+    gap: 2px;
+    max-width: 100%;
+}
+
+.trackIcons .spotify-icons h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.trackIcons .spotify-icons .list .item {
+    padding: 0.3rem;  /* Padding based on viewport width */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+
+.trackIcons .spotify-icons .list .item:hover{
+    background-color: #e84de830;
+}
+
+.trackIcons .spotify-icons .list .item img{
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.trackIcons .spotify-icons .list .item h4 {
+    font-size: 16px;
+    color: #fff;
+    padding-bottom: 10px;
+    overflow-wrap: break-word;
+
+}
+
+.trackIcons .spotify-icons .list .item p {
+    color: #989898;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+}
+
+/* Track Table */
+.trackTable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.trackTable .tracks {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 97.5%;
+    color: #ffffff;
+    border-collapse: collapse;
+    align-content: space-between;
+}
+.trackTable thead {
+    border-bottom: 1px solid white;
+}
+
+.trackTable .trackRows {
+    height: 50px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.trackTable .tableItems {
+	color: #ffffff;
+	font-size: 18px;
+    height: 40px;
+    min-height: 5%;
+    width: 100%;
+    transition: 0.2s all;
+}
+
+.trackTable tr.tableItems:nth-child(odd) {
+	background-color: #a944a940;
+}
+
+.trackTable tr.tableItems:nth-child(odd):hover {
+	background-color: #a944a980;
+    transition: 0.2s all;
+}
+
+.trackTable tr.tableItems:nth-child(even):hover {
+	background-color: #a944a920;
+}
+
+.trackTable .rank {
+    padding-left: 4px;
+    font-weight: bold;
+}
+
+.trackTable .track {
+    padding-left: 12px;
+}
+
+.trackTable .artist {
+    padding-left: 12px;
+}
+
+.trackTable .followers {
+    padding-right: 25px;
+}
+
+/* ARTIST ICONS */
+
+.artistIcons .spotify-icons .list {
+    display: grid;
+    grid-template-columns: repeat(8, 2fr);
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100%;
+    gap: 2px;
+    max-width: 100%;
+}
+
+.artistIcons .spotify-icons h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.artistIcons .spotify-icons .list .item {
+    padding: 0.3rem;  /* Padding based on viewport width */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+
+.artistIcons .spotify-icons .list .item:hover{
+    background-color: #e84de830;
+}
+
+.artistIcons .spotify-icons .list .item img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.artistIcons .spotify-icons .list .item h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    overflow-wrap: break-word;
+
+}
+
+.artistIcons .spotify-icons .list .item p {
+    color: #989898;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+}
+
+.display {
+    display: inline;
+}
+
+.topbar .navbar button {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 8px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-right: 20px;
+    background-color: blue;
+}
+
+.dropdown {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: inline-block;
+}
+
+.dropdown .user {
+    background-color: #e84de830;
+    color: white;
+    width: auto;
+    height: 3rem;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    transition: all ease 0.3s;
+}
+
+.user:hover {
+    background-color: #a944a9;
+    transition: all ease 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: transparent;
+    width: 100%;
+    z-index: 1;
+    transition: all ease 0.3s;
+}
+
+.dropdown-content a {
+    position: fixed;
+    text-decoration: none;
+    background-color: #a944a9;
+    color: white;
+    width: auto;
+    height: 3rem;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    transition: all ease 0.3s;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    transition: all ease 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #a944a9;
+    transition: all ease 0.3s;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 160px;
+    }
+
+    .containerContents {
+        margin-left: 160px;
+    }
+
+    .trackIcons .spotify-icons .list {
+        display: grid;
+        grid-template-columns: repeat(4, 2fr);
+    }
+
+    .artistIcons .spotify-icons .list {
+        display: grid;
+        grid-template-columns: repeat(4, 2fr);
+    }
+
+    .sidebar .logo button {
+        font-size: 16px;
+    }
+
+    .sidebar .navigation .sidebarButton {
+        font-size: 18px;
+    }
+
+    .topbar .navbar {
+        margin-left: 160px;
+    }
+
+    .topbar .navbar ul li {
+        height: 125px;
+        width: 150px;
+    }
+
+    .dropdown .user {
+        font-size: 14px;
+    }
+
+    .trackTable .tableItems {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 160px;
+    }
+
+    .containerContents {
+        margin-left: 160px;
+    }
+
+    .trackIcons .spotify-icons .list {
+        display: grid;
+        grid-template-columns: repeat(4, 2fr);
+    }
+
+    .trackIcons .spotify-icons .list .item h4 {
+        font-size: 12px;
+    }
+
+    .artistIcons .spotify-icons .list {
+        display: grid;
+        grid-template-columns: repeat(4, 2fr);
+    }
+
+    .artistIcons .spotify-icons .list .item h4 {
+        font-size: 12px;
+    }
+
+    .trackIcons .spotify-icons .list .item p {
+        font-size: 12px;
+    }
+
+    .sidebar .logo button {
+        font-size: 16px;
+    }
+
+    .sidebar .navigation .sidebarButton {
+        font-size: 18px;
+    }
+
+    .topbar .navbar {
+        margin-left: 160px;
+    }
+
+    .topbar .navbar ul li {
+        height: 125px;
+        width: 125px;
+    }
+
+    .dropdown .user {
+        font-size: 14px;
+    }
+
+    .dropdown .user {
+        font-size: 14px;
+    }
+
+    .dropdown .user .display-name{
+        display: none;
+    }
+
+    .dropdown-content a{
+        font-size: 10px;
+    }
+
+    .trackTable .tableItems {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 450px) {
+    .main-container{
+        width: 100%;
+    }
+    .sidebar {
+        position: fixed;
+        width: 100%;
+        height: 70px; /* Adjust height to fit the top as a bar */
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+    }
+
+    .sidebar .policies {
+        display: none;
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo if it takes up too much space */
+    }
+
+    .sidebar .navigation {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+    }
+    
+    .sidebar .navigation .display-top {
+        display: none;
+    }
+
+    .sidebar .navigation ul {
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .sidebar .navigation ul li {
+        margin: 0px;
+        padding: 0px;
+        font-size: 14px;
+    }
+
+    .sidebar .navigation .sidebarButton {
+        height: 100%;
+        width: 100%;
+        transform: translateX(0px);
+    }
+
+    /* HOVERING OVER SIDEBAR BUTTONS */
+    .sidebar .navigation .sidebarButton:focus {
+        outline: none; /* Remove default outline */
+        background: linear-gradient(180deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+        color: #ffffff;
+        transition: all 0.5s ease;
+    }
+
+    /* Active State */
+    .sidebar .navigation .sidebarButton.active {
+        background: linear-gradient(180deg, rgba(28,28,28,1) 0%, rgba(17,17,17,0) 100%);
+        color: #ffffff;
+        transform: translateX(0px);
+        transition: all 0.5s ease;
+    }
+
+    /* Hover State */
+    .sidebar .navigation .sidebarButton:hover {
+        color: #ffffff;
+        transition: all 0.5s ease;
+    }
+
+    .containerContents {
+        margin-top: 70px; /* Push content below the fixed sidebar */
+        margin-left: 0;
+    }
+
+    /* Track and artist icons adjustments */
+    .trackIcons .spotify-icons .list,
+    .artistIcons .spotify-icons .list {
+        grid-template-columns: repeat(2, 2fr);
+    }
+
+    .trackIcons .spotify-icons .list .item h4,
+    .artistIcons .spotify-icons .list .item h4 {
+        font-size: 12px;
+    }
+
+    .trackIcons .spotify-icons .list .item p,
+    .artistIcons .spotify-icons .list .item p {
+        font-size: 12px;
+    }
+
+    /* Adjust navbar in topbar */
+    .topbar .navbar {
+        width: 100%;
+        margin-top: 45px;
+        margin-left: 0;
+    }
+
+    .topbar .navbar ul {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 2fr);
+    }
+
+    .topbar .navbar ul li {
+        height: 75px;
+        width: 100%;
+        font-size: 8px;
+    }
+
+    .topbar .navbar ul li .navbarButton {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    /* Dropdown and table adjustments */
+    .dropdown {
+        width: 100%;
+        position: relative;
+        justify-content: center; /* Centers content horizontally */
+        align-items: center; /* Centers content vertically */
+        text-align: center;
+        font-size: 8px;
+        right: auto;
+        margin-left: auto;
+        margin-right: auto; /* Centers the dropdown horizontally */
+        padding: 10px;
+    }
+
+    .dropdown .dropdown-content {
+        position: relative;
+        justify-content: center; /* Centers content horizontally */
+        align-items: center; /* Centers content vertically */
+        text-align: center;
+    }
+
+    .dropdown .dropdown-content a{
+        display: relative; /* Enables flexbox layout */
+        position: relative;
+        justify-content: center; /* Centers content horizontally */
+        align-items: center; /* Centers content vertically */
+        text-align: center;
+        top: 15px;
+        left: 0px;
+        right: 0px;
+        font-size: 16px;
+        height: 600px;
+        width: 125px; /* Makes the links take up the full width of the parent */
+    }
+
+    .dropdown .user {
+        background-color: #e84de830;
+        font-size: 20px;
+        width: auto;
+    }
+
+    .dropdown .user:active {
+        background-color: #e84de850;
+    }
+    
+
+    .dropdown .user .display-name {
+        display: inline;
+    }
+
+    .dropdown-content a {
+        font-size: 8px;
+    }
+
+    .trackTable {
+        width: 96%;
+    }
+    
+    .trackTable .tableItems {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .trackTable .tracks {
+        width: 97.5%;
+    }
+}
