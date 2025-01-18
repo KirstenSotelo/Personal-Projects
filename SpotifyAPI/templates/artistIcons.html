@@ -1,0 +1,31 @@
+{% macro artistIcons(artists, id, duration) -%}
+
+<div class="spotify-icons", id="{{ id }}">
+    <h2>Top Artists - {{ duration }}</h2>
+    <div class="list">
+        {% for artist in artists[:8] %}
+        <div class="item artist-item" data-url="{{ artist.external_urls['spotify'] }}" style="cursor: pointer;">
+            <img src="{{ artist.images[0]['url'] }}" alt="ArtistImage">
+            <h4>{{ artist.name }}</h4>
+            <!-- JINJA FILTER FOUND AT MAIN.PY, format_followers -->
+            <p>{{ artist.followers['total'] | format_followers }} followers</p>
+            <!--
+            <p>Genres: {{ artist.genres | join(', ') }}</p>
+            -->
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".artist-item").forEach(function (element) {
+        element.addEventListener("click", function () {
+            const url = this.getAttribute("data-url");
+            window.open(url, "_blank");
+            });
+        });
+    });
+</script>
+
+{%- endmacro %}

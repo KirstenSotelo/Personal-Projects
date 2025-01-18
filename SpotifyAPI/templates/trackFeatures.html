@@ -1,0 +1,37 @@
+{% macro trackFeatures(songs, id, duration) -%}
+<div class="trackFeatures" id="{{ id }}">
+    <table class="features">
+        <thead>
+            <tr class="featureRows">
+                <td class="rank">Rank</td>
+                <td class="track">Track</td>
+                <td class="artists">Artist</td>
+                <td class="acousticness">Acousticness</td>
+                <td class="danceability">Danceability</td>
+                <td class="liveness">Liveness</td>
+            </tr>
+        </thead>
+        {% for song in songs %}
+            <tr class="tableItems feature-item" data-url="{{ song.external_urls['spotify'] }}" style="cursor: pointer;">
+                <td class="rank">{{ loop.index }}</td>
+                <td class="track">{{ song.name }}</td>
+                <td class="artists">{{ song.artists | map(attribute='name') | join(', ') }}</td>
+                <td class="acousticness">{{ "%.2f"|format(song.audio_features.acousticness) }}</td>
+                <td class="danceability">{{ "%.2f"|format(song.audio_features.danceability) }}</td>
+                <td class="liveness">{{ "%.2f"|format(song.audio_features.liveness) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".feature-item").forEach(function (element) {
+            element.addEventListener("click", function () {
+                const url = this.getAttribute("data-url");
+                window.open(url, "_blank");
+            });
+        });
+    });
+</script>
+{%- endmacro %}
