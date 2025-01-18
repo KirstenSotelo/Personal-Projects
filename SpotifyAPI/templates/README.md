@@ -9,4 +9,5 @@ This is the pre-login page of the website
 
 ### homepage.html
 This is an EXAMPLE of a post-login page of the website. Yours may look different depending on your stats.
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/6211a7a3-bc02-4d4e-999a-0870e6ae75ac)
+
