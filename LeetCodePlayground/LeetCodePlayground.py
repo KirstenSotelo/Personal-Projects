@@ -332,6 +332,92 @@ class Methods(object):
 
         return solve(l1, l2)
 
+    def strStr(self, haystack, needle): # SOLUTION WORKS, BUT COULD BE BETTER
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+
+        temp = ""
+        for i in range(len(haystack) - len(needle) + 1):
+            if haystack[i] == needle[0]:
+                for j in range(len(needle)):
+                    if haystack[j+i] == needle[j]:
+                        temp += needle[j]
+                    else:
+                        temp = ""
+                        break
+
+                if temp == needle:
+                    return i
+                else:
+                    temp = ""
+
+        return -1
+                    
+    def strStrBetter(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        # Edge case: if needle is empty, return 0
+        if not needle:
+            return 0
+
+        # Loop through haystack, stopping early if there's not enough space for needle
+        for i in range(len(haystack) - len(needle) + 1):  # Ensure room for needle
+            if haystack[i] == needle[0]:  # Check if the first character matches
+                match = True
+                for j in range(1, len(needle)):  # Compare subsequent characters
+                    if haystack[i + j] != needle[j]:
+                        match = False
+                        break
+                if match:
+                    return i  # Return the starting index if the full needle matches
+
+        return -1  # Return -1 if needle is not found in haystack
+        
+    def isPalindrome(self, s): # Inplace checking
+        clean_s = ''.join(char for char in s if char.isalnum())
+        clean_s = clean_s.lower()
+        palindrome = True
+        for i in range(len(clean_s)):
+            if clean_s[i] != clean_s[-i-1]:
+                palindrome = False
+
+        return palindrome
+
+    def isPalindrome(self, s): # Reverse string, check if reversed is equal
+        clean_s = ''.join(char for char in s if char.isalnum())
+        clean_s = clean_s.lower()
+
+        reversed = clean_s[::-1]
+
+        if reversed != clean_s:
+            return False
+        return True
+
+    def isSubsequence(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        temp = ""
+        tempCount = 0
+        for i in range(len(t)):
+            #print(t[i])
+            if tempCount == len(s):
+                return True
+            
+            if t[i] == s[tempCount]:
+                #print(s[tempCount])
+                tempCount += 1
+
+        return tempCount == len(s)
+
 
 if __name__ == "__main__":
     methods = Methods()
@@ -344,4 +430,7 @@ if __name__ == "__main__":
     #methods.maxProfit2([7,1,2,1,2])
     #print(methods.canJump([2,0,0]))
     #print(methods.generateParenthesis(3))
-    print(methods.mergeTwoLists([1,2,4], [1,3,4]))
+    #print(methods.mergeTwoLists([1,2,4], [1,3,4]))
+    #print(methods.strStr("aaa", "aaaa"))
+    #print(methods.isPalindrome("raceecar"))
+    print(methods.isSubsequence("abc", "abeeeexce"))
