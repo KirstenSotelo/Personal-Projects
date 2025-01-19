@@ -16,7 +16,7 @@ This portfolio website is a personal hub to showcase who I am, my experiences, t
 ---
 
 ## Demo  
-![Portfolio Demo](demo_screenshot.png)  
+![image](https://github.com/user-attachments/assets/c0c5e125-133a-47d8-8fd2-fba1b577489e)
 *Above: Screenshot of the portfolio's landing page.*  
 
 🔗 **Live Demo**: https://cs.torontomu.ca/~ksotelo/
