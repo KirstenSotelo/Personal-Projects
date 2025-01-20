@@ -505,7 +505,72 @@ class Methods(object):
     
         return count
 
+    def longestCommonPrefixFail(self, strs): # This question is so ambiguous
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
 
+        # Handle edge case where strs is empty
+        if not strs:
+            return ""
+
+        # Handle edge case where strs contains only one string
+        if len(strs) == 1:
+            return strs[0]
+
+        tempStr = ""
+        tempDic = {}
+
+        for strings in strs:
+            for char in strings:
+                if char not in "aeiou":  # If it's not a vowel (you can keep this condition if you want to exclude vowels)
+                    tempStr += char
+                elif tempStr in tempDic.keys():
+                    tempDic[tempStr] = tempDic[tempStr] + 1
+                    tempStr = ""
+                    break
+                else:
+                    tempDic[tempStr] = 1
+                    tempStr = ""
+                    break
+
+        # Find the prefix with the maximum frequency in the dictionary
+        if tempDic:
+            longest = max(tempDic, key=tempDic.get)
+        else:
+            return ""
+
+        if tempDic[longest] == 1:
+            return ""
+        
+        return longest
+
+            
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        if not strs: # Empty list case
+            return ""
+        
+        # Start with the first string as the prefix
+        prefix = strs[0]
+        
+        # Compare the prefix with each string in the list
+        for string in strs[1:]:
+            # Reduce the prefix length until it matches the start of the current string
+            while not string.startswith(prefix):
+                prefix = prefix[:-1]
+                if not prefix:
+                    return ""
+        
+        print(prefix)
+        return prefix
+
+
+        
 
 if __name__ == "__main__":
     methods = Methods()
@@ -530,4 +595,5 @@ if __name__ == "__main__":
     #l4 = ListNode(1, ListNode(1, ListNode(1)))
     #print(methods.addTwoNumbers(l3, l4))
 
-    print(methods.lengthOfLastWord("hello there "))
+    #print(methods.lengthOfLastWord("hello there "))
+    methods.longestCommonPrefix(["flog","flow","feloello"])
