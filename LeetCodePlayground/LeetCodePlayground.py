@@ -1,3 +1,9 @@
+
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Methods(object):
     # ----------------------------------------------------------
     # HELPER FUNCTIONS
@@ -418,6 +424,88 @@ class Methods(object):
 
         return tempCount == len(s)
 
+    def addTwoNumbersPass(self, l1, l2): # Logic works, but didn't know I had to return a ListNode
+        """
+        :type l1: Optional[ListNode]
+        :type l2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        carry = 0
+        temp = []
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
+
+            if val1 + val2 <= 9:
+                temp.append(val1 + val2 + carry)
+                carry=0
+            else:
+                temp.append((val1 + val2)//10 + carry)
+                carry=1
+
+            if l1:
+                l1 = l1.next
+            
+            if l2:
+                l2 = l2.next
+
+        temp = temp[::-1]
+        print(temp)
+        return temp
+
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: Optional[ListNode]
+        :type l2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        carry = 0
+        dummy = ListNode()  # Dummy node to simplify list creation
+        current = dummy  # Pointer to build the result list
+
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
+
+            # Calculate sum and carry
+            total = val1 + val2 + carry
+            carry = total // 10
+            current.next = ListNode(total % 10)  # Add the digit to the result list
+
+            # Move pointers
+            current = current.next
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+
+        return dummy.next
+
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+
+        temp = s[::-1]
+        count = 0
+        wordFound = False
+
+        for i in temp:
+            if i != ' ':
+                wordFound = True
+
+            if wordFound == True:
+                if i != ' ':
+                    count += 1
+                else:
+                    break
+            else:
+                continue
+    
+        return count
+
+
 
 if __name__ == "__main__":
     methods = Methods()
@@ -432,5 +520,14 @@ if __name__ == "__main__":
     #print(methods.generateParenthesis(3))
     #print(methods.mergeTwoLists([1,2,4], [1,3,4]))
     #print(methods.strStr("aaa", "aaaa"))
-    #print(methods.isPalindrome("raceecar"))
-    print(methods.isSubsequence("abc", "abeeeexce"))
+    #print(methods.isPalindrome("abcba"))
+    #print(methods.isSubsequence("abc", "abeeeexce"))
+
+    #3l1 = ListNode(3, ListNode(1, ListNode(1)))
+    #l2 = ListNode(8, ListNode(0, ListNode(1)))
+
+    #l3 = ListNode(1, ListNode(1, ListNode(1, ListNode(1))))
+    #l4 = ListNode(1, ListNode(1, ListNode(1)))
+    #print(methods.addTwoNumbers(l3, l4))
+
+    print(methods.lengthOfLastWord("hello there "))
