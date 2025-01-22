@@ -572,6 +572,36 @@ class Methods(object):
 
         
 
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        citations.sort(reverse=True)
+
+        h = 0
+
+        i1 = 1
+        count = 0
+        for i in range(len(citations)):
+            #print("count", i1)
+            if i1 > len(citations):
+                break
+
+            for j in range(len(citations)):
+                #print(citations[j])
+                if citations[j] >= i1:
+                    count+=1
+                
+                if count >= i1:
+                    h += 1
+                    break
+
+            count=0
+            i1+=1
+
+        return h
+    
 if __name__ == "__main__":
     methods = Methods()
     #methods.removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)
@@ -596,4 +626,5 @@ if __name__ == "__main__":
     #print(methods.addTwoNumbers(l3, l4))
 
     #print(methods.lengthOfLastWord("hello there "))
-    methods.longestCommonPrefix(["flog","flow","feloello"])
+    #methods.longestCommonPrefix(["flog","flow","feloello"])
+    methods.hIndex([9,7,6,2,1])
