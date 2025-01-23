@@ -602,6 +602,23 @@ class Methods(object):
 
         return h
     
+    def mergeAlternately(self, word1, word2):
+        """
+        :type word1: str
+        :type word2: str
+        :rtype: str
+        """
+        
+        temp = ""
+        for i in range(min(len(word1), len(word2))):
+            #print(word1[i])
+            temp += word1[i]
+            temp += word2[i]
+
+        temp += word1[i+1:]
+        temp += word2[i+1:]
+        return temp
+
 if __name__ == "__main__":
     methods = Methods()
     #methods.removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)
@@ -627,4 +644,5 @@ if __name__ == "__main__":
 
     #print(methods.lengthOfLastWord("hello there "))
     #methods.longestCommonPrefix(["flog","flow","feloello"])
-    methods.hIndex([9,7,6,2,1])
+    #methods.hIndex([9,7,6,2,1])
+    methods.mergeAlternately("abc123", "def")
