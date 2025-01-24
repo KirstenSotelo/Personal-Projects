@@ -23,6 +23,11 @@ The application provides an interactive and visually appealing interface to expl
 ![image](https://github.com/user-attachments/assets/8904db65-1219-4b58-9906-d3b406138ca9)
 *Above: Example visualization of index.html*
 
+### Post-login Home page
+![image](https://github.com/user-attachments/assets/03b0bace-e48e-4725-83ec-a06546f26b01)
+*Above: Example visualization of the homepage after logging in.*
+
+### Top Artists page
 ![image](https://github.com/user-attachments/assets/98cad4fb-c666-4274-bff6-423f047fd67a)
 *Above: Example visualization of top artists over time.*
 
