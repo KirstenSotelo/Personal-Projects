@@ -1,19 +1,30 @@
+import math
+
 
 class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
-class Methods(object):
+class Helper(object):
     # ----------------------------------------------------------
     # HELPER FUNCTIONS
     # -------------------------------------------------------
+
 
     def reverse(self, arr, start, end):
         while start < end:
             arr[start], arr[end] = arr[end], arr[start]
             start += 1
             end -= 1
+
+
+    def gcd(x, y):
+        while y != 0:
+            (x, y) = (y, x % y)
+        return x
+
+class Methods(object):
 
     # FUNCTIONS
 
@@ -619,6 +630,38 @@ class Methods(object):
         temp += word2[i+1:]
         return temp
 
+    def gcdOfStringsWorking(self, str1, str2): # This uses math import, works, but LeetCode doesn't allow
+        """
+        :type str1: str
+        :type str2: str
+        :rtype: str
+        """
+        temp = ''
+        gcdLength = math.gcd(len(str1), len(str2))
+
+        for i in range(gcdLength):
+            temp += str1[i]
+
+        return temp
+    
+    def gcdOfStrings(self, str1, str2):
+        """
+        :type str1: str
+        :type str2: str
+        :rtype: str
+        """
+        temp = ''
+        gcdLength = Helper.gcd(len(str1), len(str2))
+
+        for i in range(gcdLength):
+            if str1[i] == str2[i]:
+                temp += str1[i]
+
+        if str1 + str2 == str2 + str1:  # This is to check if they are the same string, (checking if they can be constructed with temp)
+            return temp
+
+        return ""
+
 if __name__ == "__main__":
     methods = Methods()
     #methods.removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)
@@ -645,4 +688,5 @@ if __name__ == "__main__":
     #print(methods.lengthOfLastWord("hello there "))
     #methods.longestCommonPrefix(["flog","flow","feloello"])
     #methods.hIndex([9,7,6,2,1])
-    methods.mergeAlternately("abc123", "def")
+    #methods.mergeAlternately("abc123", "def")
+    methods.gcdOfStrings("ABCDEF", "DEF")
