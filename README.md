@@ -5,7 +5,9 @@
 
 ## Projects  
 
-### 1. Portfolio Website 🌟  
+### 1. Portfolio Website 🌟
+**Repository Link:** [Portfolio Repository](https://github.com/KirstenSotelo/Personal-Projects/tree/main/PortfolioWebsite)  
+
 **Overview:**  
 A responsive and visually appealing portfolio website to showcase my skills, experience, and projects.  
 
@@ -19,11 +21,11 @@ A responsive and visually appealing portfolio website to showcase my skills, exp
 - **Frontend:** HTML, CSS, JavaScript  
 - **Design:** CSS Grid and Flexbox for layout, responsive design techniques.  
 
-**Repository Link:** [Portfolio Repository](https://github.com/KirstenSotelo/Personal-Projects/tree/main/PortfolioWebsite)  
-
 ---
 
 ### 2. Spotistics 🎵  
+**Repository Link:** [Spotistics Repository](https://github.com/KirstenSotelo/Personal-Projects/tree/main/SpotifyAPI)  
+
 **Overview:**  
 A web application that connects to Spotify's API to provide insights into your listening habits by displaying your top tracks over three time ranges:  
 - Last month  
@@ -39,5 +41,3 @@ A web application that connects to Spotify's API to provide insights into your l
 - **Backend:** Python (Flask), Jinja2 for templating  
 - **Frontend:** HTML, CSS, JavaScript  
 - **API:** Spotify Web API for user data fetching  
-
-**Repository Link:** [Spotistics Repository](https://github.com/KirstenSotelo/Personal-Projects/tree/main/SpotifyAPI)  
