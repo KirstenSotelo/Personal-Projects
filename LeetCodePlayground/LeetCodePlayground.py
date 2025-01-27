@@ -9,7 +9,7 @@ class ListNode(object):
 class Helper(object):
     # ----------------------------------------------------------
     # HELPER FUNCTIONS
-    # -------------------------------------------------------
+    # ----------------------------------------------------------
 
 
     def reverse(self, arr, start, end):
@@ -661,6 +661,58 @@ class Methods(object):
             return temp
 
         return ""
+    
+    def kidsWithCandies(self, candies, extraCandies):
+        """
+        :type candies: List[int]
+        :type extraCandies: int
+        :rtype: List[bool]
+        """
+
+        temp = []
+
+        for i in range(len(candies)):
+            #print(candies[i] + extraCandies)
+            if candies[i] + extraCandies >= max(candies):
+                temp.append(True)
+            else:
+                temp.append(False)
+
+        return temp
+    
+    def canPlaceFlowers(self, flowerbed, n):
+        """
+        :type flowerbed: List[int]
+        :type n: int
+        :rtype: bool
+        """
+
+        # Base Cases
+        if flowerbed[0] == 0 and len(flowerbed) == 1:
+            return True
+
+        # EDGE CASES
+        if flowerbed[0] == 0 and flowerbed[1] == 0:
+            flowerbed[0] = 1
+            n -= 1
+
+        if flowerbed[len(flowerbed)-1] == 0 and flowerbed[len(flowerbed)-2] == 0:
+            flowerbed[len(flowerbed)-1] = 1
+            n -= 1
+
+        # Iterating
+        for i in range(1, len(flowerbed)-1, 1):
+            if flowerbed[i-1] == 0 and flowerbed[i+1] == 0 and flowerbed[i] == 0:
+                flowerbed[i] = 1
+                n -= 1
+
+        #print(flowerbed)
+        if n <= 0:
+            return True
+        else:
+            return False
+
+        
 
 if __name__ == "__main__":
     methods = Methods()
@@ -689,4 +741,6 @@ if __name__ == "__main__":
     #methods.longestCommonPrefix(["flog","flow","feloello"])
     #methods.hIndex([9,7,6,2,1])
     #methods.mergeAlternately("abc123", "def")
-    methods.gcdOfStrings("ABCDEF", "DEF")
+    #methods.gcdOfStrings("ABCDEF", "DEF")
+    #methods.kidsWithCandies([2,3,5,1,3], 3)
+    print(methods.canPlaceFlowers([0,0,1,0,1], 1))
